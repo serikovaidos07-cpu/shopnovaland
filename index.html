@@ -25,12 +25,28 @@
         }
 
         header {
-    padding: 80px 20px;
+    padding: 100px 20px;
     text-align: center;
-    background: linear-gradient(rgba(11, 15, 25, 0.5), rgba(11, 15, 25, 0.7)), 
-                url('https://i.imgur.com/3Z6zQ6T.jpg') center/cover no-repeat fixed; 
-    /* Жоғарыдағы сілтеме уақытша тексеруге арналған шие бағының суреті */
-    border-bottom: 2px solid rgba(0, 162, 255, 0.3);
+    /* Бастапқы неон градиенті */
+    background: linear-gradient(135deg, #0b0f19, #001a33, #004d99, #0b0f19);
+    background-size: 400% 400%;
+    /* Анимацияны қосамыз: аты, уақыты, түрі, шексіздігі */
+    animation: gradientAnimation 15s ease infinite;
+    border-bottom: 2px solid rgba(0, 162, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Анимацияның қалай жүретінін сипаттаймыз */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Жазудың астына қосымша көлеңке қосып, оны көбірек ерекшелейміз */
+.logo {
+    text-shadow: 0 0 15px rgba(0, 162, 255, 0.8), 0 0 30px rgba(0, 162, 255, 0.5);
 }
 
         .logo { font-size: 3.5rem; font-weight: 900; letter-spacing: 8px; color: var(--primary); text-shadow: 0 0 20px rgba(0,162,255,0.5); margin: 0; }
