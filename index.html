@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaLand | Донат дүкені</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00a2ff;
+            --bg: #0b0f19;
+            --card-bg: #161b28;
+            --modal-bg: #1c2333;
+            --text: #ffffff;
+            --accent: #fbd07c;
+            --success: #ffcc00;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(11, 15, 25, 0.8), rgba(11, 15, 25, 0.9)), url('https://i.imgur.com/zV8Q8XW.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid rgba(0, 162, 255, 0.3);
+        }
+
+        .logo { font-size: 3.5rem; font-weight: 900; letter-spacing: 8px; color: var(--primary); text-shadow: 0 0 20px rgba(0,162,255,0.5); margin: 0; }
+
+        .nav-bar { display: flex; justify-content: center; gap: 15px; margin: -25px 0 50px 0; position: relative; z-index: 10; }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .nav-btn.active { background: var(--primary); box-shadow: 0 0 15px var(--primary); border-color: var(--primary); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; min-height: 80vh; }
+
+        .ranks-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s;
+            text-align: center;
+            width: 260px;
+            padding-top: 20px;
+        }
+
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); }
+        
+        .card-emoji {
+            font-size: 80px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .card-body { padding: 20px; }
+        .card-title { font-size: 1.5rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        .card-price { color: var(--accent); font-size: 1.1rem; margin: 15px 0; font-weight: 700; }
+
+        .buy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary);
+            margin: 50px 0 30px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center; justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            width: 100%; max-width: 900px;
+            border-radius: 25px;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(0, 162, 255, 0.3);
+        }
+
+        .modal-left { flex: 1.2; padding: 40px; border-right: 1px solid rgba(255,255,255,0.05); }
+        .modal-right { flex: 1; padding: 40px; background: rgba(0,0,0,0.15); }
+
+        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: #555; z-index: 10; }
+
+        .option {
+            background: #0b111d;
+            border: 2px solid #2d3446;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .option.active { border-color: var(--primary); background: rgba(0,162,255,0.05); }
+
+        .payment-box {
+            border: 2px dashed var(--success);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            background: rgba(255, 204, 0, 0.05);
+        }
+
+        .card-number { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; color: white; display: block; margin: 15px 0; }
+        
+        .copy-btn {
+            background: var(--success);
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instruction-item { text-align: left; margin: 10px 0; font-size: 0.95rem; color: #ccc; }
+
+        .gold-calc { background: #111827; padding: 35px; border-radius: 25px; text-align: center; max-width: 550px; margin: 0 auto; border: 1px solid #2d3446; }
+        .gold-input { width: 180px; padding: 12px; background: #1c2333; border: 2px solid #2d3446; border-radius: 10px; color: white; font-size: 1.4rem; text-align: center; }
+        .gold-presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 25px 0; }
+        .preset { background: #1c2333; padding: 12px; border-radius: 10px; cursor: pointer; border: 1px solid transparent; font-weight: 700; transition: 0.2s; }
+        .preset:hover { border-color: var(--success); color: var(--success); }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+
+        /* Footer Style */
+        footer {
+            margin-top: 100px;
+            background: #080b13;
+            padding: 60px 20px;
+            border-top: 2px solid rgba(0, 162, 255, 0.1);
+            text-align: center;
+        }
+        .footer-menu {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .footer-menu a {
+            color: #888;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .footer-menu a:hover { color: var(--primary); }
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">NOVALAND</div>
+    <div style="color:var(--accent); font-weight: 600; margin-top: 5px;">IP: NOVALAND.PRO | ПОРТ: 31005</div>
+</header>
+
+<div class="container">
+    <div class="nav-bar">
+        <button class="nav-btn active" id="btn-ranks" onclick="switchTab('ranks', this)">Привилегиялар</button>
+        <button class="nav-btn" id="btn-cases" onclick="switchTab('cases', this)">Кейстер</button>
+        <button class="nav-btn" id="btn-gold" onclick="switchTab('gold', this)">Алтындар</button>
+    </div>
+
+    <div id="ranks" class="section active">
+        <div class="ranks-container" id="ranksGrid"></div>
+        <h2 class="section-title">Қосымша мүмкіндіктер</h2>
+        <div class="ranks-container">
+            <div class="card">
+                <div class="card-emoji">🔓</div>
+                <div class="card-body">
+                    <h3 class="card-title">РАЗБАН</h3>
+                    <div class="card-price">750 ₸</div>
+                    <button class="buy-btn" onclick="openPayment('Разбан', 750)">Сатып алу</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-emoji">🎭</div>
+                <div class="card-body">
+                    <h3 class="card-title">ТИТУЛ</h3>
+                    <div class="card-price">300 ₸</div>
+                    <button class="buy-btn" onclick="openPayment('Кастомный титул', 300)">Сатып алу</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cases" class="section">
+        <h2 class="section-title">Донат Кейстер</h2>
+        <div class="grid" id="donateCases"></div>
+        <h2 class="section-title" style="color: var(--success);">Алтын Кейстер</h2>
+        <div class="grid" id="goldCases"></div>
+    </div>
+
+    <div id="gold" class="section">
+        <div class="gold-calc">
+            <h2 style="color: var(--success); margin-bottom: 10px;">💎 ҚАНША АЛТЫН АЛАСЫҢ?</h2>
+            <p style="color: #666; margin-bottom: 25px; font-weight: 600;">КУРС: 1 АЛТЫН = 3 ТЕҢГЕ</p>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <input type="number" id="goldInp" class="gold-input" value="100" oninput="calcGold()">
+            </div>
+            <div class="gold-presets">
+                <div class="preset" onclick="setGold(100)">100 💎</div>
+                <div class="preset" onclick="setGold(500)">500 💎</div>
+                <div class="preset" onclick="setGold(1000)">1000 💎</div>
+                <div class="preset" onclick="setGold(2500)">2500 💎</div>
+                <div class="preset" onclick="setGold(5000)">5000 💎</div>
+                <div class="preset" onclick="setGold(10000)">10000 💎</div>
+            </div>
+            <div id="goldResult" style="margin: 20px 0; font-size: 1.6rem; font-weight: 900;">
+                💎 <span id="valG">100</span> алтын = <span id="valT" style="color:var(--success);">300</span> ₸
+            </div>
+            <button class="buy-btn" style="background: var(--success); color: black;" onclick="openPayment('Алтындар', currentGoldPrice)">Сатып алу</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    footer {
+        margin-top: 100px;
+        background: #080b13;
+        padding: 40px 20px;
+        border-top: 2px solid rgba(0, 162, 255, 0.1);
+        text-align: center;
+    }
+    .footer-info {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    .info-item {
+        background: rgba(255, 255, 255, 0.03);
+        padding: 15px 25px;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 162, 255, 0.1);
+    }
+    .info-label {
+        display: block;
+        color: var(--primary);
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+    }
+    .info-value {
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
+    .footer-brand {
+        font-size: 1.2rem;
+        font-weight: 900;
+        letter-spacing: 4px;
+        color: rgba(255, 255, 255, 0.1);
+        margin-top: 20px;
+        text-transform: uppercase;
+    }
+</style>
+
+<footer>
+    <div class="footer-info">
+        <div class="info-item">
+            <span class="info-label">Сервер IP</span>
+            <span class="info-value">novaland.pro</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Порт (Bedrock)</span>
+            <span class="info-value">31005</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Нұсқа (Java)</span>
+            <span class="info-value">1.21.x</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Нұсқа (Bedrock)</span>
+            <span class="info-value">1.21.130+</span>
+        </div>
+    </div>
+    <div class="footer-brand">NOVALAND 2026</div>
+</footer>
+<div id="detailModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModals()">&times;</span>
+        <div class="modal-left">
+            <h2 id="detTitle" style="font-size: 2.2rem; font-weight: 900; margin-bottom: 25px;">ITEM</h2>
+            <div id="detOptions"></div>
+            <input type="text" id="playerNick" placeholder="Ойын нигіңізді жазыңыз" style="width:100%; padding:15px; background:#0b111d; border:1px solid #2d3446; color:white; border-radius:10px; margin-top:10px; box-sizing: border-box;">
+            <button class="buy-btn" style="margin-top: 20px;" onclick="goToStep3()">Төлемге өту</button>
+        </div>
+        <div class="modal-right">
+            <h3 style="color: var(--primary); text-transform: uppercase;">Командалар:</h3>
+            <ul id="detCmds" style="list-style:none; padding:0; color:#b9bbbe; font-size:0.9rem;"></ul>
+            <h3 style="color: var(--primary); text-transform: uppercase; margin-top: 25px;">Мүмкіндіктер:</h3>
+            <p id="detExtra" style="color:#b9bbbe; font-size:0.9rem; line-height: 1.6;"></p>
+        </div>
+    </div>
+</div>
+
+<div id="paymentModal" class="modal">
+    <div class="modal-content" style="max-width: 500px; display: block; padding: 40px; text-align: center;">
+        <span class="close-btn" onclick="closeModals()">&times;</span>
+        <h2 style="color: var(--success); margin-bottom: 5px;">ТӨЛЕМ ЖАСАУ</h2>
+        <p style="color: #888; margin-bottom: 25px;">Тауар: <span id="payItemName" style="color:white;">-</span></p>
+        
+        <div class="payment-box">
+            <span style="color: var(--success); font-size: 0.8rem; font-weight: 800;">КАСПИЙ КАРТА НӨМІРІ:</span>
+            <span class="card-number" id="cardNum">4400 4303 3992 8092</span>
+            <button class="copy-btn" onclick="copyCard()">📋 Көшіру</button>
+        </div>
+
+        <div style="margin-top: 25px;">
+            <div class="instruction-item">1. Қажетті <b id="payFinalPrice" style="color:var(--success)">0</b> ₸ сомасын аудар</div>
+            <div class="instruction-item">2. Түсініктемеге: <b><span id="payNickRef">НИК</span> + <span id="payItemRef">ТАНДАУ</span></b> жаз</div>
+            <div class="instruction-item">3. Чекті Telegram-ға жібер: <a href="https://t.me/tornado437" style="color:var(--primary); text-decoration:none;">@tornado437</a></div>
+        </div>
+
+        <button class="buy-btn" style="margin-top: 30px; background: #24A1DE;" onclick="window.open('https://t.me/tornado437')">Telegram-ға хабарласу</button>
+    </div>
+</div>
+
+<script>
+    let currentGoldPrice = 300;
+    let selectedPrice = 0;
+    let selectedItem = "";
+
+    const rankData = [
+        { name: 'NOVA', price: 190, emoji: '⚡', prices: [190, 390, 990], cmds: ['/feed — аштықты толтыру', '/hat — басына зат кию'], extra: '⌁ 2 home • 5 ah' },
+        { name: 'SARBAZ', price: 490, emoji: '🛡️', prices: [490, 890, 1290], cmds: ['/ec — эндер сандық ашу', '/clear — инвентарь тазалау', '/craft — верстак ашу'], extra: '⌁ 3 home • 6 ah. Төменгі ранг командалары қолжетімді.' },
+        { name: 'BATYR', price: 790, emoji: '⚔️', prices: [690, 1190, 1690], cmds: ['/ext — отты өшіру', '/repair hand — қолдағыны жөндеу'], extra: '⌁ 4 home • 7 ah. Төменгі ранг командалары қолжетімді.' },
+        { name: 'KEREY', price: 1090, emoji: '🏹', prices: [1090, 1490, 1990], cmds: ['/fly — ұшу', '/ignore — елемеу', '/top — жоғарыға телепорт'], extra: '⌁ 4 home • 8 ah. Төменгі ранг командалары қолжетімді.' },
+        { name: 'KOSEM', price: 1390, emoji: '👑', prices: [1390, 1890, 3490], cmds: ['/invsee — инв көру', '/near — жақын ойыншылар', '/bc — хабарлама жазу'], extra: '⌁ 6 home • 10 ah. Төменгі ранг командалары қолжетімді.' },
+        { name: 'HAN', price: 1790, emoji: '🏛️', prices: [1790, 2590, 3490], cmds: ['/heal — толық емделу', '/ptime — өз уақыт ауыстыру', '/anvil — наковальня ашу', '/endersee — эндер көру'], extra: '⌁ 8 home • 14 ah. Төменгі ранг командалары қолжетімді.' },
+        { name: 'ULYHAN', price: 2590, emoji: '💎', prices: [2590, 4290, 6490], cmds: ['/grant — ранг беру', '/repair all — бәрін жөндеу', '/speed fly — ұшу жылдамдығы'], extra: '⌁ 10 home • 16 ah. Төменгі ранг командалары қолжетімді.' }
+    ];
+
+    function switchTab(id, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        btn.classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function init() {
+        const grid = document.getElementById('ranksGrid');
+        rankData.forEach(r => {
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="card-emoji">${r.emoji}</div>
+                    <div class="card-body">
+                        <h3 class="card-title">${r.name}</h3>
+                        <div class="card-price">ОТ ${r.price} ₸</div>
+                        <button class="buy-btn" onclick="openDetail('${r.name}')">Сатып алу</button>
+                    </div>
+                </div>`;
+        });
+
+        const dc = document.getElementById('donateCases');
+        const gc = document.getElementById('goldCases');
+
+        const donateData = [['1x', 490], ['3x', 1290], ['5x', 2190]];
+        donateData.forEach(c => {
+            dc.innerHTML += createCaseCard('Донат Кейс', c[0], c[1], '🎁');
+        });
+
+        const goldData = [['1x', 190], ['3x', 490], ['5x', 790]];
+        goldData.forEach(c => {
+            gc.innerHTML += createCaseCard('Алтын Кейс', c[0], c[1], '📦');
+        });
+        
+        calcGold(); // Бастапқы есептеу
+    }
+
+    function createCaseCard(name, type, price, emoji) {
+        return `<div class="card"><div class="card-emoji">${emoji}</div><div class="card-body"><h3 class="card-title">${name} ${type}</h3><div class="card-price">${price} ₸</div><button class="buy-btn" onclick="openPayment('${name} ${type}', ${price})">Сатып алу</button></div></div>`;
+    }
+
+    function openDetail(name) {
+        const r = rankData.find(x => x.name === name);
+        selectedItem = r.name;
+        document.getElementById('detTitle').innerText = r.name;
+        document.getElementById('detExtra').innerText = r.extra;
+        document.getElementById('detCmds').innerHTML = r.cmds.map(c => `<li>↳ ${c}</li>`).join('');
+        
+        const per = ['1 ай', '3 ай', 'Мәңгілік'];
+        document.getElementById('detOptions').innerHTML = r.prices.map((p, i) => `
+            <div class="option ${i===0?'active':''}" onclick="selOpt(this, ${p}, '${per[i]}')">
+                <span>${per[i]}</span><span style="color:var(--primary); font-weight:900;">${p} ₸</span>
+            </div>`).join('');
+        
+        selectedPrice = r.prices[0];
+        selectedItem = r.name + " (1 ай)";
+        document.getElementById('detailModal').style.display = 'flex';
+    }
+
+    function selOpt(el, price, period) {
+        document.querySelectorAll('.option').forEach(o => o.classList.remove('active'));
+        el.classList.add('active');
+        selectedPrice = price;
+        selectedItem = document.getElementById('detTitle').innerText + " (" + period + ")";
+    }
+
+    function goToStep3() {
+        const nick = document.getElementById('playerNick').value;
+        if(!nick) return alert('Ойын нигіңізді жазыңыз!');
+        openPayment(selectedItem, selectedPrice, nick);
+    }
+
+    function openPayment(name, price, nick = "НИК") {
+        document.getElementById('payItemName').innerText = name;
+        document.getElementById('payFinalPrice').innerText = price;
+        document.getElementById('payNickRef').innerText = nick;
+        document.getElementById('payItemRef').innerText = name;
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+
+    function closeModals() {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+    }
+
+    function setGold(v) {
+        document.getElementById('goldInp').value = v;
+        calcGold();
+    }
+
+    function calcGold() {
+        let v = document.getElementById('goldInp').value;
+        currentGoldPrice = v * 3; // КУРС: 1 алтын = 3 теңге
+        document.getElementById('valG').innerText = v;
+        document.getElementById('valT').innerText = currentGoldPrice;
+        selectedItem = v + " Алтын";
+    }
+
+    function copyCard() {
+        const num = document.getElementById('cardNum').innerText;
+        navigator.clipboard.writeText(num);
+        alert('Карта нөмірі көшірілді!');
+    }
+
+    init();
+</script>
+
+</body>
+</html>
