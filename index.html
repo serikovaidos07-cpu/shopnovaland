@@ -24,32 +24,34 @@
             overflow-x: hidden;
         }
 
+        /* ЖАҢА STYLE: АНИМАЦИЯЛАНҒАН ГРАДИЕНТ ФОН */
         header {
-    padding: 100px 20px;
-    text-align: center;
-    /* Бастапқы неон градиенті */
-    background: linear-gradient(135deg, #0b0f19, #001a33, #004d99, #0b0f19);
-    background-size: 400% 400%;
-    /* Анимацияны қосамыз: аты, уақыты, түрі, шексіздігі */
-    animation: gradientAnimation 15s ease infinite;
-    border-bottom: 2px solid rgba(0, 162, 255, 0.5);
-    position: relative;
-    overflow: hidden;
-}
+            padding: 120px 20px;
+            text-align: center;
+            background: linear-gradient(-45deg, #0b0f19, #001a33, #004d99, #00a2ff, #0b0f19);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            border-bottom: 2px solid rgba(0, 162, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
 
-/* Анимацияның қалай жүретінін сипаттаймыз */
-@keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-/* Жазудың астына қосымша көлеңке қосып, оны көбірек ерекшелейміз */
-.logo {
-    text-shadow: 0 0 15px rgba(0, 162, 255, 0.8), 0 0 30px rgba(0, 162, 255, 0.5);
-}
-
-        .logo { font-size: 3.5rem; font-weight: 900; letter-spacing: 8px; color: var(--primary); text-shadow: 0 0 20px rgba(0,162,255,0.5); margin: 0; }
+        /* Логотипке неонды эффект қосу */
+        .logo { 
+            font-size: 4rem; 
+            font-weight: 900; 
+            letter-spacing: 12px; 
+            color: white; 
+            text-shadow: 0 0 20px rgba(0,162,255,0.8), 0 0 40px rgba(0,162,255,0.4); 
+            margin: 0; 
+            text-transform: uppercase;
+        }
 
         .nav-bar { display: flex; justify-content: center; gap: 15px; margin: -25px 0 50px 0; position: relative; z-index: 10; }
 
@@ -200,7 +202,6 @@
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
 
-        /* Footer Style */
         footer {
             margin-top: 100px;
             background: #080b13;
@@ -208,29 +209,40 @@
             border-top: 2px solid rgba(0, 162, 255, 0.1);
             text-align: center;
         }
-        .footer-menu {
+        .footer-info {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 30px;
+            gap: 30px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
-        .footer-menu a {
-            color: #888;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 800;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            cursor: pointer;
+        .info-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 162, 255, 0.1);
         }
-        .footer-menu a:hover { color: var(--primary); }
+        .info-label {
+            display: block;
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .info-value {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
         .footer-brand {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 900;
             letter-spacing: 4px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.1);
             margin-top: 20px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -238,7 +250,7 @@
 
 <header>
     <div class="logo">NOVALAND</div>
-    <div style="color:var(--accent); font-weight: 600; margin-top: 5px;">IP: NOVALAND.PRO | ПОРТ: 31005</div>
+    <div style="color:var(--accent); font-weight: 800; margin-top: 10px; letter-spacing: 2px;">IP: NOVALAND.PRO | ПОРТ: 31005</div>
 </header>
 
 <div class="container">
@@ -301,51 +313,6 @@
     </div>
 </div>
 
-<style>
-    footer {
-        margin-top: 100px;
-        background: #080b13;
-        padding: 40px 20px;
-        border-top: 2px solid rgba(0, 162, 255, 0.1);
-        text-align: center;
-    }
-    .footer-info {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
-    .info-item {
-        background: rgba(255, 255, 255, 0.03);
-        padding: 15px 25px;
-        border-radius: 12px;
-        border: 1px solid rgba(0, 162, 255, 0.1);
-    }
-    .info-label {
-        display: block;
-        color: var(--primary);
-        font-size: 0.7rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        margin-bottom: 5px;
-        letter-spacing: 1px;
-    }
-    .info-value {
-        color: white;
-        font-weight: 700;
-        font-size: 1.1rem;
-    }
-    .footer-brand {
-        font-size: 1.2rem;
-        font-weight: 900;
-        letter-spacing: 4px;
-        color: rgba(255, 255, 255, 0.1);
-        margin-top: 20px;
-        text-transform: uppercase;
-    }
-</style>
-
 <footer>
     <div class="footer-info">
         <div class="info-item">
@@ -367,6 +334,7 @@
     </div>
     <div class="footer-brand">NOVALAND 2026</div>
 </footer>
+
 <div id="detailModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModals()">&times;</span>
@@ -432,6 +400,7 @@
 
     function init() {
         const grid = document.getElementById('ranksGrid');
+        grid.innerHTML = "";
         rankData.forEach(r => {
             grid.innerHTML += `
                 <div class="card">
@@ -446,18 +415,16 @@
 
         const dc = document.getElementById('donateCases');
         const gc = document.getElementById('goldCases');
+        dc.innerHTML = "";
+        gc.innerHTML = "";
 
         const donateData = [['1x', 490], ['3x', 1290], ['5x', 2190]];
-        donateData.forEach(c => {
-            dc.innerHTML += createCaseCard('Донат Кейс', c[0], c[1], '🎁');
-        });
+        donateData.forEach(c => { dc.innerHTML += createCaseCard('Донат Кейс', c[0], c[1], '🎁'); });
 
         const goldData = [['1x', 190], ['3x', 490], ['5x', 790]];
-        goldData.forEach(c => {
-            gc.innerHTML += createCaseCard('Алтын Кейс', c[0], c[1], '📦');
-        });
+        goldData.forEach(c => { gc.innerHTML += createCaseCard('Алтын Кейс', c[0], c[1], '📦'); });
         
-        calcGold(); // Бастапқы есептеу
+        calcGold();
     }
 
     function createCaseCard(name, type, price, emoji) {
@@ -514,7 +481,7 @@
 
     function calcGold() {
         let v = document.getElementById('goldInp').value;
-        currentGoldPrice = v * 3; // КУРС: 1 алтын = 3 теңге
+        currentGoldPrice = v * 3;
         document.getElementById('valG').innerText = v;
         document.getElementById('valT').innerText = currentGoldPrice;
         selectedItem = v + " Алтын";
