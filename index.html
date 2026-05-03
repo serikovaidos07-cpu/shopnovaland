@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaLand | Донат дүкені</title>
+    <title>NovaLand | Official Donate</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,6 +14,7 @@
             --text: #ffffff;
             --accent: #fbd07c;
             --success: #ffcc00;
+            --danger: #ff4747;
         }
 
         body {
@@ -27,136 +28,140 @@
         header {
             padding: 120px 20px;
             text-align: center;
-            background: linear-gradient(-45deg, #0b0f19, #001a33, #004d99, #00a2ff, #0b0f19);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-            border-bottom: 2px solid rgba(0, 162, 255, 0.3);
+            background: radial-gradient(circle at center, #004d99 0%, #0b0f19 70%);
+            border-bottom: 2px solid rgba(0, 162, 255, 0.2);
             position: relative;
         }
 
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         .logo { 
-            font-size: 4rem; 
+            font-size: clamp(2.5rem, 10vw, 5rem);
             font-weight: 900; 
-            letter-spacing: 12px; 
-            color: white; 
-            text-shadow: 0 0 20px rgba(0,162,255,0.8), 0 0 40px rgba(0,162,255,0.4); 
-            margin: 0; 
+            letter-spacing: 15px; 
+            text-shadow: 0 0 30px rgba(0,162,255,0.6);
+            margin: 0;
             text-transform: uppercase;
         }
 
-        .nav-bar { display: flex; justify-content: center; gap: 15px; margin: -25px 0 50px 0; position: relative; z-index: 10; flex-wrap: wrap; }
+        .container { max-width: 1200px; margin: -40px auto 60px; padding: 0 20px; position: relative; z-index: 5; }
+
+        .nav-bar { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-bottom: 50px; 
+        }
 
         .nav-btn {
-            padding: 12px 30px;
+            padding: 15px 35px;
             background: var(--card-bg);
             border: 1px solid rgba(255,255,255,0.1);
             color: white;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 800;
             transition: 0.3s;
             text-transform: uppercase;
         }
 
-        .nav-btn.active { background: var(--primary); box-shadow: 0 0 15px var(--primary); border-color: var(--primary); }
+        .nav-btn.active { 
+            background: var(--primary); 
+            box-shadow: 0 0 20px rgba(0,162,255,0.4);
+            border-color: var(--primary);
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; min-height: 80vh; }
-
-        .ranks-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
+        .ranks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s;
+            border-radius: 24px;
+            padding: 35px 25px;
             text-align: center;
-            width: 270px;
-            padding-top: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
             display: flex;
             flex-direction: column;
         }
 
-        .card:hover { transform: translateY(-8px); border-color: var(--primary); }
-        
-        .card-emoji {
-            font-size: 80px;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .card:hover { 
+            transform: translateY(-15px); 
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .card-title { font-size: 1.5rem; font-weight: 900; margin: 0; text-transform: uppercase; color: var(--primary); }
-        .card-price { color: var(--accent); font-size: 1.1rem; margin: 15px 0; font-weight: 700; }
-        .old-price { text-decoration: line-through; color: #666; font-size: 0.9rem; margin-right: 5px; }
+        .rank-id {
+            position: absolute;
+            top: 20px; left: 20px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.1);
+            font-size: 2rem;
+        }
+
+        .card-title { 
+            font-size: 2rem; 
+            font-weight: 900; 
+            margin: 10px 0; 
+            color: var(--primary);
+            letter-spacing: 2px;
+        }
+
+        .price-tag { margin: 20px 0; }
+        .old-p { text-decoration: line-through; color: var(--danger); font-size: 1rem; font-weight: 600; opacity: 0.7; }
+        .new-p { font-size: 1.8rem; font-weight: 900; color: var(--success); display: block; }
 
         .buy-btn {
             background: var(--primary);
             color: white;
             border: none;
-            width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            font-weight: 800;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 900;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.3s;
+            margin-top: auto;
         }
 
-        .section-title {
-            text-align: center;
-            color: var(--primary);
-            margin: 50px 0 30px;
-            font-size: 2rem;
-            text-transform: uppercase;
-            font-weight: 900;
-        }
+        .buy-btn:hover { filter: brightness(1.1); transform: scale(1.02); }
 
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.95);
             z-index: 1000;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
 
         .modal-content {
             background: var(--modal-bg);
             width: 100%; max-width: 950px;
-            border-radius: 25px;
+            border-radius: 30px;
             display: flex;
-            overflow: hidden;
             position: relative;
-            border: 1px solid rgba(0, 162, 255, 0.3);
+            border: 1px solid var(--primary);
             max-height: 90vh;
+            overflow: hidden;
         }
 
-        .modal-left { flex: 1.2; padding: 40px; border-right: 1px solid rgba(255,255,255,0.05); overflow-y: auto; }
-        .modal-right { flex: 1; padding: 40px; background: rgba(0,0,0,0.15); overflow-y: auto; }
+        .modal-side { flex: 1; padding: 40px; overflow-y: auto; }
+        .modal-info { background: rgba(0,0,0,0.2); border-left: 1px solid rgba(255,255,255,0.05); }
 
-        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: #555; z-index: 10; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 35px; cursor: pointer; color: #555; }
 
-        .option {
+        .period-option {
             background: #0b111d;
             border: 2px solid #2d3446;
-            padding: 18px;
-            margin-bottom: 12px;
-            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -164,89 +169,21 @@
             transition: 0.2s;
         }
 
-        .option:hover { border-color: rgba(0, 162, 255, 0.5); }
-        .option.active { border-color: var(--primary); background: rgba(0,162,255,0.1); }
+        .period-option.active { border-color: var(--primary); background: rgba(0,162,255,0.1); }
 
-        .payment-box {
-            border: 2px dashed var(--success);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            margin: 20px 0;
-            background: rgba(255, 204, 0, 0.05);
+        .input-nick {
+            width: 100%; padding: 18px; background: #0b111d; border: 2px solid #2d3446;
+            color: white; border-radius: 12px; font-size: 1rem; margin: 20px 0; box-sizing: border-box;
         }
 
-        .card-number { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; color: white; display: block; margin: 15px 0; }
-        
-        .copy-btn {
-            background: var(--success);
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .list-title { color: var(--primary); font-weight: 800; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .feature-list { list-style: none; padding: 0; margin-bottom: 25px; }
+        .feature-list li { margin-bottom: 10px; font-size: 0.95rem; color: #ccc; display: flex; gap: 10px; }
+        .feature-list li::before { content: "⚡"; color: var(--primary); }
 
-        .instruction-item { text-align: left; margin: 10px 0; font-size: 0.95rem; color: #ccc; }
-
-        .gold-calc { background: #111827; padding: 35px; border-radius: 25px; text-align: center; max-width: 550px; margin: 0 auto; border: 1px solid #2d3446; }
-        .gold-input { width: 180px; padding: 12px; background: #1c2333; border: 2px solid #2d3446; border-radius: 10px; color: white; font-size: 1.4rem; text-align: center; }
-        .gold-presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 25px 0; }
-        .preset { background: #1c2333; padding: 12px; border-radius: 10px; cursor: pointer; border: 1px solid transparent; font-weight: 700; transition: 0.2s; }
-        .preset:hover { border-color: var(--success); color: var(--success); }
-
-        .section { display: none; }
-        .section.active { display: block; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
-
-        footer {
-            margin-top: 100px;
-            background: #080b13;
-            padding: 60px 20px;
-            border-top: 2px solid rgba(0, 162, 255, 0.1);
-            text-align: center;
-        }
-
-        .footer-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .info-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 15px 25px;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 162, 255, 0.1);
-        }
-
-        .info-label {
-            display: block;
-            color: var(--primary);
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .info-value {
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .modal-content { flex-direction: column; max-height: 95vh; }
-            .modal-left, .modal-right { padding: 25px; border: none; }
-            .logo { font-size: 2.5rem; letter-spacing: 6px; }
+        @media (max-width: 850px) {
+            .modal-content { flex-direction: column; }
+            .modal-side { padding: 30px; }
         }
     </style>
 </head>
@@ -254,312 +191,154 @@
 
 <header>
     <div class="logo">NOVALAND</div>
-    <div style="color:var(--accent); font-weight: 800; margin-top: 10px; letter-spacing: 2px;">IP: NOVALAND.PRO | ПОРТ: 31005</div>
+    <div style="color:var(--accent); font-weight: 800; margin-top: 15px; letter-spacing: 3px;">IP: NOVALAND.PRO | PORT: 31005</div>
 </header>
 
 <div class="container">
     <div class="nav-bar">
-        <button class="nav-btn active" id="btn-ranks" onclick="switchTab('ranks', this)">Привилегиялар</button>
-        <button class="nav-btn" id="btn-cases" onclick="switchTab('cases', this)">Кейстер</button>
-        <button class="nav-btn" id="btn-gold" onclick="switchTab('gold', this)">Алтындар</button>
+        <button class="nav-btn active">Привилегиялар</button>
+        <button class="nav-btn" onclick="alert('Жақында...')">Кейстер</button>
     </div>
 
-    <div id="ranks" class="section active">
-        <div class="ranks-container" id="ranksGrid"></div>
-        <h2 class="section-title">Қосымша мүмкіндіктер</h2>
-        <div class="ranks-container">
-            <div class="card">
-                <div class="card-emoji">🔓</div>
-                <div class="card-body">
-                    <h3 class="card-title">РАЗБАН</h3>
-                    <div class="card-price">750 ₸</div>
-                    <button class="buy-btn" onclick="openPayment('Разбан', 750)">Сатып алу</button>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-emoji">🎭</div>
-                <div class="card-body">
-                    <h3 class="card-title">ТИТУЛ</h3>
-                    <div class="card-price">300 ₸</div>
-                    <button class="buy-btn" onclick="openPayment('Кастомный титул', 300)">Сатып алу</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="cases" class="section">
-        <h2 class="section-title">Донат Кейстер</h2>
-        <div class="grid" id="donateCases"></div>
-        <h2 class="section-title" style="color: var(--success);">Алтын Кейстер</h2>
-        <div class="grid" id="goldCases"></div>
-    </div>
-
-    <div id="gold" class="section">
-        <div class="gold-calc">
-            <h2 style="color: var(--success); margin-bottom: 10px;">💎 ҚАНША АЛТЫН АЛАСЫҢ?</h2>
-            <p style="color: #666; margin-bottom: 25px; font-weight: 600;">КУРС: 1 АЛТЫН = 3 ТЕҢГЕ</p>
-            <div style="display:flex; gap:10px; justify-content:center;">
-                <input type="number" id="goldInp" class="gold-input" value="100" oninput="calcGold()">
-            </div>
-            <div class="gold-presets">
-                <div class="preset" onclick="setGold(100)">100 💎</div>
-                <div class="preset" onclick="setGold(500)">500 💎</div>
-                <div class="preset" onclick="setGold(1000)">1000 💎</div>
-                <div class="preset" onclick="setGold(2500)">2500 💎</div>
-                <div class="preset" onclick="setGold(5000)">5000 💎</div>
-                <div class="preset" onclick="setGold(10000)">10000 💎</div>
-            </div>
-            <div id="goldResult" style="margin: 20px 0; font-size: 1.6rem; font-weight: 900;">
-                💎 <span id="valG">100</span> алтын = <span id="valT" style="color:var(--success);">300</span> ₸
-            </div>
-            <button class="buy-btn" style="background: var(--success); color: black;" onclick="openPayment('Алтындар', currentGoldPrice)">Сатып алу</button>
-        </div>
-    </div>
+    <div class="ranks-grid" id="ranksGrid"></div>
 </div>
 
-<footer>
-    <div class="footer-info">
-        <div class="info-item">
-            <span class="info-label">Сервер IP</span>
-            <span class="info-value">novaland.pro</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Порт (Bedrock)</span>
-            <span class="info-value">31005</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Нұсқа (Java)</span>
-            <span class="info-value">1.21.x</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Нұсқа (Bedrock)</span>
-            <span class="info-value">1.21.130+</span>
-        </div>
-    </div>
-    <div class="footer-brand">NOVALAND 2026</div>
-</footer>
-
-<div id="detailModal" class="modal">
+<div id="rankModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeModals()">&times;</span>
-        <div class="modal-left">
-            <h2 id="detTitle" style="font-size: 2.2rem; font-weight: 900; margin-bottom: 25px; text-transform: uppercase;">ITEM</h2>
-            <div id="detOptions"></div>
-            <input type="text" id="playerNick" placeholder="Ойын нигіңізді жазыңыз" style="width:100%; padding:15px; background:#0b111d; border:1px solid #2d3446; color:white; border-radius:10px; margin-top:10px; box-sizing: border-box;">
-            <button class="buy-btn" style="margin-top: 20px;" onclick="goToStep3()">Төлемге өту</button>
-        </div>
-        <div class="modal-right">
-            <h3 style="color: var(--primary); text-transform: uppercase;">Командалар:</h3>
-            <ul id="detCmds" style="list-style:none; padding:0; color:#b9bbbe; font-size:0.9rem;"></ul>
-            <h3 style="color: var(--primary); text-transform: uppercase; margin-top: 25px;">Мүмкіндіктер:</h3>
-            <p id="detExtra" style="color:#b9bbbe; font-size:0.9rem; line-height: 1.6; white-space: pre-line;"></p>
-        </div>
-    </div>
-</div>
-
-<div id="paymentModal" class="modal">
-    <div class="modal-content" style="max-width: 500px; display: block; padding: 40px; text-align: center;">
-        <span class="close-btn" onclick="closeModals()">&times;</span>
-        <h2 style="color: var(--success); margin-bottom: 5px;">ТӨЛЕМ ЖАСАУ</h2>
-        <p style="color: #888; margin-bottom: 25px;">Тауар: <span id="payItemName" style="color:white;">-</span></p>
+        <span class="close-btn" onclick="closeModal()">&times;</span>
         
-        <div class="payment-box">
-            <span style="color: var(--success); font-size: 0.8rem; font-weight: 800;">КАСПИЙ КАРТА НӨМІРІ:</span>
-            <span class="card-number" id="cardNum">4400 4303 3992 8092</span>
-            <button class="copy-btn" onclick="copyCard()">📋 Көшіру</button>
+        <div class="modal-side">
+            <h2 id="mTitle" style="font-size: 2.5rem; margin: 0 0 30px 0; font-weight: 900; color: var(--primary);">RANK</h2>
+            <div id="periodBox"></div>
+            <input type="text" id="nickInput" class="input-nick" placeholder="Ойын нигіңізді жазыңыз">
+            <button class="buy-btn" style="width:100%" onclick="confirmPayment()">Сатып алу</button>
         </div>
 
-        <div style="margin-top: 25px;">
-            <div class="instruction-item">1. Қажетті <b id="payFinalPrice" style="color:var(--success)">0</b> ₸ сомасын аудар</div>
-            <div class="instruction-item">2. Түсініктемеге: <b><span id="payNickRef">НИК</span> + <span id="payItemRef">ТАНДАУ</span></b> жаз</div>
-            <div class="instruction-item">3. Чекті Telegram-ға жібер: <a href="https://t.me/tornado437" style="color:var(--primary); text-decoration:none;">@tornado437</a></div>
+        <div class="modal-side modal-info">
+            <span class="list-title">Командалар:</span>
+            <ul id="mCmds" class="feature-list"></ul>
+            
+            <span class="list-title">Мүмкіндіктер:</span>
+            <ul id="mFeatures" class="feature-list"></ul>
         </div>
-
-        <button class="buy-btn" style="margin-top: 30px; background: #24A1DE;" onclick="window.open('https://t.me/tornado437')">Telegram-ға хабарласу</button>
     </div>
 </div>
 
 <script>
-    let currentGoldPrice = 300;
-    let selectedPrice = 0;
-    let selectedItem = "";
-
-    const rankData = [
-        { 
-            name: 'ɴᴏᴋᴇʀ', 
-            oldPrice: 990, 
-            price: 190, 
-            emoji: '🛡️', 
-            prices: [190, 590, 990], 
-            cmds: ['/kit noker', '/hat', '/feed'], 
-            extra: '• 3 home\n• 5 ah' 
+    const ranks = [
+        {
+            id: 1, name: 'ɴᴏᴋᴇʀ', old: 990, base: 190,
+            prices: { month1: 190, month3: 590, permanent: 990 },
+            cmds: ['/kit noker', '/hat', '/feed'],
+            features: ['3 home', '5 ah']
         },
-        { 
-            name: 'sᴀʀʙᴀᴢ', 
-            oldPrice: 1290, 
-            price: 490, 
-            emoji: '⚔️', 
-            prices: [490, 890, 1290], 
-            cmds: ['/kit sarbaz', '/ec', '/craft'], 
-            extra: '• 4 home\n• 6 ah' 
+        {
+            id: 2, name: 'sᴀʀʙᴀᴢ', old: 1290, base: 490,
+            prices: { month1: 490, month3: 890, permanent: 1290 },
+            cmds: ['/kit sarbaz', '/ec', '/craft'],
+            features: ['4 home', '6 ah']
         },
-        { 
-            name: 'ʙᴀᴛʏʀ', 
-            oldPrice: 1590, 
-            price: 790, 
-            emoji: '🏹', 
-            prices: [790, 1190, 1590], 
-            cmds: ['/kit batyr', '/ext', '/clear', '/suicide', '/rtp far'], 
-            extra: '• 5 home\n• 7 ah' 
+        {
+            id: 3, name: 'ʙᴀᴛʏʀ', old: 1590, base: 790,
+            prices: { month1: 790, month3: 1190, permanent: 1590 },
+            cmds: ['/kit batyr', '/ext', '/clear', '/suicide', '/rtp far'],
+            features: ['5 home', '7 ah']
         },
-        { 
-            name: 'ᴋᴇʀᴇʏ', 
-            oldPrice: 1990, 
-            price: 1090, 
-            emoji: '🐎', 
-            prices: [1090, 1590, 1990], 
-            cmds: ['/kit kerey', '/repair hand', '/top', '/ignore'], 
-            extra: '• 6 home\n• 8 ah' 
+        {
+            id: 4, name: 'ᴋᴇʀᴇʏ', old: 1990, base: 1090,
+            prices: { month1: 1090, month3: 1590, permanent: 1990 },
+            cmds: ['/kit kerey', '/repair hand', '/top', '/ignore'],
+            features: ['6 home', '8 ah']
         },
-        { 
-            name: 'ᴋᴏsᴇᴍ', 
-            oldPrice: 3190, 
-            price: 1490, 
-            emoji: '👑', 
-            prices: [1490, 2390, 3190], 
-            cmds: ['/kit kosem', '/heal', '/bc', '/near', '/fly'], 
-            extra: '• 8 home\n• 10 ah' 
+        {
+            id: 5, name: 'ᴋᴏsᴇᴍ', old: 3190, base: 1490,
+            prices: { month1: 1490, month3: 2390, permanent: 3190 },
+            cmds: ['/kit kosem', '/heal', '/bc', '/near', '/fly'],
+            features: ['8 home', '10 ah']
         },
-        { 
-            name: 'ʜᴀɴ', 
-            oldPrice: 3690, 
-            price: 1790, 
-            emoji: '🦁', 
-            prices: [1790, 2690, 3690], 
-            cmds: ['/kit han', '/ptime', '/pweather', '/invsee', '/anvil'], 
-            extra: '• 10 home\n• 14 ah' 
+        {
+            id: 6, name: 'ʜᴀɴ', old: 3690, base: 1790,
+            prices: { month1: 1790, month3: 2690, permanent: 3690 },
+            cmds: ['/kit han', '/ptime', '/pweather', '/invsee', '/anvil'],
+            features: ['10 home', '14 ah']
         },
-        { 
-            name: 'ᴜʟʏʜᴀɴ', 
-            oldPrice: 6490, 
-            price: 2590, 
-            emoji: '💎', 
-            prices: [2590, 4590, 6490], 
-            cmds: ['/kit ulyhan', '/speed fly', '/repair all', '/endersee'], 
-            extra: '• 12 home\n• 16 ah' 
+        {
+            id: 7, name: 'ᴜʟʏʜᴀɴ', old: 6490, base: 2590,
+            prices: { month1: 2590, month3: 4590, permanent: 6490 },
+            cmds: ['/kit ulyhan', '/speed fly', '/repair all', '/endersee'],
+            features: ['12 home', '16 ah']
         },
-        { 
-            name: 'ɴᴏᴠᴀ', 
-            oldPrice: 7390, 
-            price: 3190, 
-            emoji: '🔥', 
-            prices: [3190, 5290, 7390], 
-            cmds: ['/kit nova', '/grant', '/grindstone', '/rtp base'], 
-            extra: '• Төмендегі барлық артықшылықтар\n• Home: 14' 
+        {
+            id: 8, name: 'ɴᴏᴠᴀ', old: 7390, base: 3190,
+            prices: { month1: 3190, month3: 5290, permanent: 7390 },
+            cmds: ['/kit nova', '/grant', '/grindstone', 'rtp base'],
+            features: ['Төмендегі барлық артықшылықтар', 'Home: 14']
         }
     ];
 
-    function switchTab(id, btn) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        btn.classList.add('active');
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
+    let currentRank = null;
+    let selPrice = 0;
+    let selPeriod = "";
 
     function init() {
         const grid = document.getElementById('ranksGrid');
-        grid.innerHTML = "";
-        rankData.forEach(r => {
-            grid.innerHTML += `
-                <div class="card">
-                    <div class="card-emoji">${r.emoji}</div>
-                    <div class="card-body">
-                        <h3 class="card-title">${r.name}</h3>
-                        <div class="card-price"><span class="old-price">${r.oldPrice}₸</span> ${r.price}₸</div>
-                        <button class="buy-btn" onclick="openDetail('${r.name}')">Сатып алу</button>
-                    </div>
-                </div>`;
-        });
-
-        const dc = document.getElementById('donateCases');
-        const gc = document.getElementById('goldCases');
-        dc.innerHTML = "";
-        gc.innerHTML = "";
-
-        const donateData = [['1x', 490], ['3x', 1290], ['5x', 2190]];
-        donateData.forEach(c => { dc.innerHTML += createCaseCard('Донат Кейс', c[0], c[1], '🎁'); });
-
-        const goldData = [['1x', 190], ['3x', 490], ['5x', 790]];
-        goldData.forEach(c => { gc.innerHTML += createCaseCard('Алтын Кейс', c[0], c[1], '📦'); });
-        
-        calcGold();
+        grid.innerHTML = ranks.map(r => `
+            <div class="card">
+                <span class="rank-id">${r.id}</span>
+                <h3 class="card-title">${r.name}</h3>
+                <div class="price-tag">
+                    <span class="old-p">${r.old}₸</span>
+                    <span class="new-p">${r.base}₸</span>
+                </div>
+                <button class="buy-btn" onclick="openRank(${r.id})">Таңдау</button>
+            </div>
+        `).join('');
     }
 
-    function createCaseCard(name, type, price, emoji) {
-        return `<div class="card"><div class="card-emoji">${emoji}</div><div class="card-body"><h3 class="card-title">${name} ${type}</h3><div class="card-price">${price} ₸</div><button class="buy-btn" onclick="openPayment('${name} ${type}', ${price})">Сатып алу</button></div></div>`;
+    function openRank(id) {
+        const r = ranks.find(x => x.id === id);
+        currentRank = r;
+        
+        document.getElementById('mTitle').innerText = r.name;
+        document.getElementById('mCmds').innerHTML = r.cmds.map(c => `<li>${c}</li>`).join('');
+        document.getElementById('mFeatures').innerHTML = r.features.map(f => `<li>${f}</li>`).join('');
+        
+        const pb = document.getElementById('periodBox');
+        pb.innerHTML = `
+            <div class="period-option active" onclick="selectPeriod(this, ${r.prices.month1}, '1 ай')">
+                <span>1 ай</span> <b>${r.prices.month1}₸</b>
+            </div>
+            <div class="period-option" onclick="selectPeriod(this, ${r.prices.month3}, '3 ай')">
+                <span>3 ай</span> <b>${r.prices.month3}₸</b>
+            </div>
+            <div class="period-option" onclick="selectPeriod(this, ${r.prices.permanent}, 'Мәңгілік')">
+                <span>Мәңгілік</span> <b>${r.prices.permanent}₸</b>
+            </div>
+        `;
+        
+        selPrice = r.prices.month1;
+        selPeriod = "1 ай";
+        document.getElementById('rankModal').style.display = 'flex';
     }
 
-    function openDetail(name) {
-        const r = rankData.find(x => x.name === name);
-        selectedItem = r.name;
-        document.getElementById('detTitle').innerText = r.name;
-        document.getElementById('detExtra').innerText = r.extra;
-        document.getElementById('detCmds').innerHTML = r.cmds.map(c => `<li>↳ ${c}</li>`).join('');
-        
-        const per = ['1 ай', '3 ай', 'Мәңгілік'];
-        document.getElementById('detOptions').innerHTML = r.prices.map((p, i) => `
-            <div class="option ${i===0?'active':''}" onclick="selOpt(this, ${p}, '${per[i]}')">
-                <span>${per[i]}</span><span style="color:var(--primary); font-weight:900;">${p} ₸</span>
-            </div>`).join('');
-        
-        selectedPrice = r.prices[0];
-        selectedItem = r.name + " (1 ай)";
-        document.getElementById('detailModal').style.display = 'flex';
-    }
-
-    function selOpt(el, price, period) {
-        document.querySelectorAll('.option').forEach(o => o.classList.remove('active'));
+    function selectPeriod(el, price, period) {
+        document.querySelectorAll('.period-option').forEach(opt => opt.classList.remove('active'));
         el.classList.add('active');
-        selectedPrice = price;
-        selectedItem = document.getElementById('detTitle').innerText + " (" + period + ")";
+        selPrice = price;
+        selPeriod = period;
     }
 
-    function goToStep3() {
-        const nick = document.getElementById('playerNick').value;
-        if(!nick) return alert('Ойын нигіңізді жазыңыз!');
-        openPayment(selectedItem, selectedPrice, nick);
+    function closeModal() {
+        document.getElementById('rankModal').style.display = 'none';
     }
 
-    function openPayment(name, price, nick = "НИК") {
-        document.getElementById('payItemName').innerText = name;
-        document.getElementById('payFinalPrice').innerText = price;
-        document.getElementById('payNickRef').innerText = nick;
-        document.getElementById('payItemRef').innerText = name;
-        document.getElementById('paymentModal').style.display = 'flex';
-    }
-
-    function closeModals() {
-        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
-    }
-
-    function setGold(v) {
-        document.getElementById('goldInp').value = v;
-        calcGold();
-    }
-
-    function calcGold() {
-        let v = document.getElementById('goldInp').value;
-        currentGoldPrice = v * 3;
-        document.getElementById('valG').innerText = v;
-        document.getElementById('valT').innerText = currentGoldPrice;
-        selectedItem = v + " Алтын";
-    }
-
-    function copyCard() {
-        const num = document.getElementById('cardNum').innerText;
-        navigator.clipboard.writeText(num);
-        alert('Карта нөмірі көшірілді!');
+    function confirmPayment() {
+        const nick = document.getElementById('nickInput').value;
+        if(!nick) return alert('Нигіңізді жазыңыз!');
+        
+        const message = `Сәлем! Мен ${currentRank.name} (${selPeriod}) сатып алғым келеді.\nНик: ${nick}\nБағасы: ${selPrice}₸`;
+        const url = `https://t.me/tornado437?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
     }
 
     init();
