@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaLand | Донат дүкені</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00a2ff;
+            --bg: #0b0f19;
+            --card-bg: #161b28;
+            --modal-bg: #1c2333;
+            --text: #ffffff;
+            --accent: #fbd07c;
+            --success: #ffcc00;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 80px 20px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1e293b 0%, var(--bg) 70%);
+            border-bottom: 2px solid rgba(0, 162, 255, 0.15);
+            position: relative;
+        }
+
+        .logo { 
+            font-size: clamp(2.5rem, 8vw, 4.5rem); 
+            font-weight: 900; 
+            letter-spacing: 12px; 
+            background: linear-gradient(135deg, #00ffff 0%, #00a2ff 50%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(0, 162, 255, 0.6)); 
+            margin: 0; 
+            text-transform: uppercase;
+        }
+
+        .nav-bar { display: flex; justify-content: center; gap: 15px; margin: -25px 0 50px 0; position: relative; z-index: 10; }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .nav-btn.active { background: var(--primary); box-shadow: 0 0 15px var(--primary); border-color: var(--primary); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover { transform: translateY(-8px); border-color: var(--primary); box-shadow: 0 10px 25px rgba(0,162,255,0.15); }
+        
+        .sticker-wrapper {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle, rgba(0, 162, 255, 0.08) 0%, rgba(0,0,0,0) 70%);
+            padding: 15px 0 0 0;
+        }
+
+        .sticker {
+            font-size: 3.5rem;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-block;
+        }
+
+        /* КЕЙСТЕРДІҢ СУРЕТТЕРІ ӘДЕМІ ЖӘНЕ СҮЙКІМДІ ТҰРУЫ ҮШІН СТИЛЬ */
+        .case-img {
+            max-height: 120px;
+            max-width: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+        }
+        
+        .card-body { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-title { font-size: 1.5rem; font-weight: 900; margin: 0; text-transform: uppercase; }
+        .card-price { color: var(--accent); font-size: 1.1rem; margin: 15px 0; font-weight: 700; }
+
+        .buy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            margin-top: auto;
+        }
+
+        .buy-btn:hover { filter: brightness(1.1); }
+
+        footer {
+            margin-top: 80px;
+            padding: 40px 20px;
+            background: #0f1422;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-info {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #8892b0;
+            letter-spacing: 1px;
+            line-height: 2;
+        }
+
+        .footer-info span {
+            color: var(--primary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center; justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            width: 100%; max-width: 900px;
+            border-radius: 25px;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(0, 162, 255, 0.3);
+        }
+
+        .modal-left { flex: 1.2; padding: 40px; border-right: 1px solid rgba(255,255,255,0.05); }
+        .modal-right { flex: 1; padding: 40px; background: rgba(0,0,0,0.15); }
+
+        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: #555; z-index: 10; }
+
+        .option {
+            background: #0b111d;
+            border: 2px solid #2d3446;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .option.active { border-color: var(--primary); background: rgba(0,162,255,0.05); }
+
+        .payment-box {
+            border: 2px dashed var(--success);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            background: rgba(255, 204, 0, 0.05);
+        }
+
+        .card-number { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; color: white; display: block; margin: 15px 0; }
+        
+        .copy-btn {
+            background: var(--success);
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instruction-item { text-align: left; margin: 10px 0; font-size: 0.95rem; color: #ccc; }
+
+        .gold-calc { background: #111827; padding: 35px; border-radius: 25px; text-align: center; max-width: 550px; margin: 0 auto; border: 1px solid #2d3446; }
+        .gold-input { width: 180px; padding: 12px; background: #1c2333; border: 2px solid #2d3446; border-radius: 10px; color: white; font-size: 1.4rem; text-align: center; }
+        .gold-presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 25px 0; }
+        .preset { background: #1c2333; padding: 12px; border-radius: 10px; cursor: pointer; border: 1px solid transparent; font-weight: 700; transition: 0.2s; }
+        .preset:hover { border-color: var(--success); color: var(--success); }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        @media (max-width: 850px) {
+            .modal-content { flex-direction: column; }
+            .modal-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">NOVALAND</div>
+    <div style="color:var(--accent); font-weight: 600; margin-top: 10px; letter-spacing: 2px;">IP: NOVALAND.PRO | ПОРТ: 31005</div>
+</header>
+
+<div class="container">
+    <div class="nav-bar">
+        <button class="nav-btn active" onclick="switchTab('ranks', this)">Привилегиялар</button>
+        <button class="nav-btn" onclick="switchTab('cases', this)">Кейстер</button>
+        <button class="nav-btn" onclick="switchTab('gold', this)">Алтындар</button>
+    </div>
+
+    <div id="ranks" class="section active"><div class="grid" id="ranksGrid"></div></div>
+
+    <div id="cases" class="section">
+        <h2 style="text-align:center; color: var(--primary); letter-spacing: 2px; font-weight: 900;">🎁 ДОНАТ КЕЙСТЕР</h2>
+        <div class="grid" id="donateCases"></div>
+        <h2 style="text-align:center; color: var(--success); margin-top: 50px; letter-spacing: 2px; font-weight: 900;">💎 АЛТЫН КЕЙСТЕР</h2>
+        <div class="grid" id="goldCases"></div>
+    </div>
+
+    <div id="gold" class="section">
+        <div class="gold-calc">
+            <h2 style="color: var(--success); margin-bottom: 25px;">💎 ҚАНША АЛТЫН АЛАСЫҢ?</h2>
+            <div style="display:flex; gap:10px; justify-content:center;">
+                <input type="number" id="goldInp" class="gold-input" value="100" oninput="calcGold()">
+            </div>
+            <div class="gold-presets">
+                <div class="preset" onclick="setGold(100)">100 💎</div>
+                <div class="preset" onclick="setGold(500)">500 💎</div>
+                <div class="preset" onclick="setGold(1000)">1000 💎</div>
+                <div class="preset" onclick="setGold(2500)">2500 💎</div>
+                <div class="preset" onclick="setGold(5000)">5000 💎</div>
+                <div class="preset" onclick="setGold(10000)">10000 💎</div>
+            </div>
+            <div id="goldResult" style="margin: 20px 0; font-size: 1.6rem; font-weight: 900;">
+                💎 <span id="valG">100</span> алтын = <span id="valT" style="color:var(--success);">300</span> ₸
+            </div>
+            <button class="buy-btn" style="background: var(--success); color: black;" onclick="openPayment('Алтындар', currentGoldPrice)">Сатып алу</button>
+        </div>
+    </div>
+</div>
+
+<div id="detailModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModals()">&times;</span>
+        <div class="modal-left">
+            <h2 id="detTitle" style="font-size: 2.2rem; font-weight: 900; margin-bottom: 25px; color: var(--primary);">ITEM</h2>
+            <div id="detOptions"></div>
+            <input type="text" id="playerNick" placeholder="Ойын нигіңізді жазыңыз" style="width:100%; padding:15px; background:#0b111d; border:1px solid #2d3446; color:white; border-radius:10px; margin-top:10px; box-sizing: border-box;">
+            <button class="buy-btn" style="margin-top: 20px;" onclick="goToStep3()">Төлемге өту</button>
+        </div>
+        <div class="modal-right">
+            <h3 style="color: var(--primary); text-transform: uppercase;">Командалар:</h3>
+            <ul id="detCmds" style="list-style:none; padding:0; color:#b9bbbe; font-size:0.9rem; line-height: 1.8;"></ul>
+            <h3 style="color: var(--primary); text-transform: uppercase; margin-top: 25px;">Мүмкіндіктер:</h3>
+            <p id="detExtra" style="color:#b9bbbe; font-size:0.9rem; line-height: 1.6;"></p>
+        </div>
+    </div>
+</div>
+
+<div id="paymentModal" class="modal">
+    <div class="modal-content" style="max-width: 500px; display: block; padding: 40px; text-align: center;">
+        <span class="close-btn" onclick="closeModals()">&times;</span>
+        <h2 style="color: var(--success); margin-bottom: 5px;">ТӨЛЕМ ЖАСАУ</h2>
+        <p style="color: #888; margin-bottom: 25px;">Тауар: <span id="payItemName" style="color:white;">-</span></p>
+        
+        <div class="payment-box">
+            <span style="color: var(--success); font-size: 0.8rem; font-weight: 800;">КАСПИЙ КАРТА НӨМІРІ:</span>
+            <span class="card-number" id="cardNum">4400 4303 3992 8092</span>
+            <button class="copy-btn" onclick="copyCard()">📋 Көшіру</button>
+        </div>
+
+        <div style="margin-top: 25px;">
+            <div class="instruction-item">1. Қажетті <b id="payFinalPrice" style="color:var(--success)">0</b> ₸ сомасын аудар</div>
+            <div class="instruction-item">2. Түсініктемеге: <b><span id="payNickRef">НИК</span> + <span id="payItemRef">ТАНДАУ</span></b> жаз</div>
+            <div class="instruction-item">3. Чекті Telegram-ға жібер: <a href="https://t.me/tornado437" style="color:var(--primary); text-decoration:none;">@tornado437</a></div>
+        </div>
+
+        <button class="buy-btn" style="margin-top: 30px; background: #24A1DE;" onclick="window.open('https://t.me/tornado437')">Telegram-ға хабарласу</button>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-info">
+        IP: <span>novaland.pro</span> &nbsp;|&nbsp; 
+        version: <span>1.21.x</span> &nbsp;|&nbsp; 
+        version: <span>1.21.130+</span>
+    </div>
+</footer>
+
+<script>
+    let currentGoldPrice = 300;
+    let selectedPrice = 0;
+    let selectedItem = "";
+
+    const rankData = [
+        { name: 'NOKER', sticker: '🛡️', color: '#8e9aaf', price: 190, prices: [190, 590, 990], cmds: ['/kit noker', '/hat', '/feed'], extra: '⌁ 3 үй нүктелері • 5 аукцион слоттары' },
+        { name: 'SARBAZ', sticker: '⚔️', color: '#ffcc00', price: 490, prices: [490, 890, 1290], cmds: ['/kit sarbaz', '/ec', '/craft'], extra: '⌁ 4 үй нүктелері • 6 аукцион слоттары. Төменгі ранг командалары қолжетімді.' },
+        { name: 'BATYR', sticker: '🏹', color: '#00e5ff', price: 790, prices: [790, 1190, 1590], cmds: ['/kit batyr', '/ext', '/clear', '/suicide', '/rtp far'], extra: '⌁ 5 үй нүктелері • 7 аукцион слоттары. Төменгі ранг командалары қолжетімді.' },
+        { name: 'KEREY', sticker: '🦅', color: '#ff00ff', price: 1090, prices: [1090, 1590, 1990], cmds: ['/kit kerey', '/repair hand', '/top', '/ignore'], extra: '⌁ 6 үй нүктелері • 8 аукцион слоттары. Төменгі ранг командалары қолжетімді.' },
+        { name: 'KOSEM', sticker: '🔮', color: '#9d4edd', price: 1490, prices: [1490, 2390, 3190], cmds: ['/kit kosem', '/heal', '/bc', '/near', '/fly'], extra: '⌁ 8 үй нүктелері • 10 аукцион слоттары. Төменгі ранг командалары қолжетімді.' },
+        { name: 'HAN', sticker: '⚡', color: '#ff9f1c', price: 1790, prices: [1790, 2690, 3690], cmds: ['/kit han', '/ptime', '/pweather', '/invsee', '/anvil'], extra: '⌁ 10 үй нүктелері • 14 аукцион слоттары. Төменгі ранг командалары қолжетімді.' },
+        { name: 'ULYHAN', sticker: '☄️', color: '#00a2ff', price: 2590, prices: [2590, 4590, 6490], cmds: ['/kit ulyhan', '/speed fly', '/repair all', '/endersee'], extra: '⌁ 12 үй нүктелері • 16 аукцион слоттары. Төменгі ранг командалары қолжетімді.' },
+        { name: 'NOVA', sticker: '👑', color: '#ff4747', price: 3190, prices: [3190, 5290, 7390], cmds: ['/kit nova', '/grant', '/grindstone', '/rtp base'], extra: '⌁ 14 үй нүктелері • Төмендегі барлық артықшылықтар' }
+    ];
+
+    function switchTab(id, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    function init() {
+        const grid = document.getElementById('ranksGrid');
+        rankData.forEach(r => {
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="sticker-wrapper">
+                        <div class="sticker" style="color: ${r.color}; border-color: ${r.color}40; box-shadow: 0 8px 25px ${r.color}20">${r.sticker}</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title" style="color: ${r.color}">${r.name}</h3>
+                        <div class="card-price">1 АЙ: ${r.price} ₸</div>
+                        <button class="buy-btn" onclick="openDetail('${r.name}')">Сатып алу</button>
+                    </div>
+                </div>`;
+        });
+
+        const dc = document.getElementById('donateCases');
+        const gc = document.getElementById('goldCases');
+
+        // ДОНАТ КЕЙСТЕРГЕ ЖАҢА СУРЕТ ҚОЙЫЛДЫ
+        const donateData = [['1x', 490], ['3x', 1290], ['5x', 2190]];
+        donateData.forEach(c => {
+            dc.innerHTML += createCaseCard('Донат Кейс', c[0], c[1], 'https://i.ibb.co.com/tprHHxLq/image.png');
+        });
+
+        // АЛТЫН КЕЙСТЕРГЕ ЖАҢА СУРЕТ ҚОЙЫЛДЫ
+        const goldData = [['1x', 190], ['3x', 490], ['5x', 790]];
+        goldData.forEach(c => {
+            gc.innerHTML += createCaseCard('Алтын Кейс', c[0], c[1], 'https://i.ibb.co.com/Lzy01tnr/image.png');
+        });
+    }
+
+    // СУРЕТТЕР ДҰРЫС КӨРІНУІ ҮШІН ФУНКЦИЯ КІШКЕНЕ ӨЗГЕРТІЛДІ (ЭМОДЗИ ОРНЫНА IMG ТЕГІ ҚОЙЫЛДЫ)
+    function createCaseCard(name, type, price, imgSrc) {
+        return `
+            <div class="card">
+                <div class="sticker-wrapper">
+                    <img src="${imgSrc}" class="case-img" alt="${name}">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">${name} ${type}</h3>
+                    <div class="card-price">${price} ₸</div>
+                    <button class="buy-btn" onclick="openPayment('${name} ${type}', ${price})">Сатып алу</button>
+                </div>
+            </div>`;
+    }
+
+    function openDetail(name) {
+        const r = rankData.find(x => x.name === name);
+        selectedItem = r.name;
+        document.getElementById('detTitle').innerText = r.name;
+        document.getElementById('detTitle').style.color = r.color;
+        document.getElementById('detExtra').innerText = r.extra;
+        document.getElementById('detCmds').innerHTML = r.cmds.map(c => `<li>↳ ${c}</li>`).join('');
+        
+        const per = ['1 ай', '3 ай', 'Мәңгілік'];
+        document.getElementById('detOptions').innerHTML = r.prices.map((p, i) => `
+            <div class="option ${i===0?'active':''}" onclick="selOpt(this, ${p}, '${per[i]}')">
+                <span>${per[i]}</span><span style="color:var(--primary); font-weight:900;">${p} ₸</span>
+            </div>`).join('');
+        
+        selectedPrice = r.prices[0];
+        selectedItem = r.name + " (1 ай)";
+        document.getElementById('detailModal').style.display = 'flex';
+    }
+
+    function selOpt(el, price, period) {
+        document.querySelectorAll('.option').forEach(o => o.classList.remove('active'));
+        el.classList.add('active');
+        selectedPrice = price;
+        selectedItem = document.getElementById('detTitle').innerText + " (" + period + ")";
+    }
+
+    function goToStep3() {
+        const nick = document.getElementById('playerNick').value;
+        if(!nick) return alert('Ойын нигіңізді жазыңыз!');
+        openPayment(selectedItem, selectedPrice, nick);
+    }
+
+    function openPayment(name, price, nick = "НИК") {
+        document.getElementById('payItemName').innerText = name;
+        document.getElementById('payFinalPrice').innerText = price;
+        document.getElementById('payNickRef').innerText = nick;
+        document.getElementById('payItemRef').innerText = name;
+        document.getElementById('paymentModal').style.display = 'flex';
+    }
+
+    function closeModals() {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+    }
+
+    function setGold(v) {
+        document.getElementById('goldInp').value = v;
+        calcGold();
+    }
+
+    function calcGold() {
+        let v = document.getElementById('goldInp').value;
+        currentGoldPrice = v * 3;
+        document.getElementById('valG').innerText = v;
+        document.getElementById('valT').innerText = currentGoldPrice;
+        selectedItem = v + " Алтын";
+    }
+
+    function copyCard() {
+        const num = document.getElementById('cardNum').innerText;
+        navigator.clipboard.writeText(num);
+        alert('Карта нөмірі көшірілді!');
+    }
+
+    init();
+</script>
+
+</body>
+</html>
