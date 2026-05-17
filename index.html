@@ -99,7 +99,6 @@
             display: inline-block;
         }
 
-        /* КЕЙСТЕРДІҢ СУРЕТТЕРІ ӘДЕМІ ЖӘНЕ СҮЙКІМДІ ТҰРУЫ ҮШІН СТИЛЬ */
         .case-img {
             max-height: 120px;
             max-width: 120px;
@@ -239,6 +238,7 @@
         <button class="nav-btn active" onclick="switchTab('ranks', this)">Привилегиялар</button>
         <button class="nav-btn" onclick="switchTab('cases', this)">Кейстер</button>
         <button class="nav-btn" onclick="switchTab('gold', this)">Алтындар</button>
+        <button class="nav-btn" onclick="switchTab('extra', this)">Қосымша</button>
     </div>
 
     <div id="ranks" class="section active"><div class="grid" id="ranksGrid"></div></div>
@@ -268,6 +268,32 @@
                 💎 <span id="valG">100</span> алтын = <span id="valT" style="color:var(--success);">300</span> ₸
             </div>
             <button class="buy-btn" style="background: var(--success); color: black;" onclick="openPayment('Алтындар', currentGoldPrice)">Сатып алу</button>
+        </div>
+    </div>
+
+    <div id="extra" class="section">
+        <h2 style="text-align:center; color: var(--primary); letter-spacing: 2px; font-weight: 900;">🔓 ҚОСЫМША МҮМКІНДІКТЕР</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="sticker-wrapper">
+                    <div class="sticker" style="color: #ff4747; border-color: #ff474740; box-shadow: 0 8px 25px rgba(255,71,71,0.2)">🔓</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title" style="color: #ff4747">РАЗБАН</h3>
+                    <div class="card-price">750 ₸</div>
+                    <button class="buy-btn" onclick="openPayment('Разбан', 750)">Сатып алу</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="sticker-wrapper">
+                    <div class="sticker" style="color: #ffcc00; border-color: #ffcc0040; box-shadow: 0 8px 25px rgba(255,204,0,0.2)">🎭</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title" style="color: #ffcc00">ТИТУЛ</h3>
+                    <div class="card-price">300 ₸</div>
+                    <button class="buy-btn" onclick="openPayment('Титул', 300)">Сатып алу</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -362,20 +388,17 @@
         const dc = document.getElementById('donateCases');
         const gc = document.getElementById('goldCases');
 
-        // ДОНАТ КЕЙСТЕРГЕ ЖАҢА СУРЕТҚОЙЫЛДЫ
-        const donateData = [['1x', 490], ['3x', 1290], ['5x', 2190]];
+        const donateData = [['1x', 590], ['3x', 1590], ['5x', 2690]];
         donateData.forEach(c => {
             dc.innerHTML += createCaseCard('Донат Кейс', c[0], c[1], 'https://i.ibb.co.com/tprHHxLq/image.png');
         });
 
-        // АЛТЫН КЕЙСТЕРГЕ ЖАҢА СУРЕТ ҚОЙЫЛДЫ
         const goldData = [['1x', 190], ['3x', 490], ['5x', 790]];
         goldData.forEach(c => {
             gc.innerHTML += createCaseCard('Алтын Кейс', c[0], c[1], 'https://i.ibb.co.com/Lzy01tnr/image.png');
         });
     }
 
-    // СУРЕТТЕР ДҰРЫС КӨРІНУІ ҮШІН ФУНКЦИЯ КІШКЕНЕ ӨЗГЕРТІЛДІ (ЭМОДЗИ ОРНЫНА IMG ТЕГІ ҚОЙЫЛДЫ)
     function createCaseCard(name, type, price, imgSrc) {
         return `
             <div class="card">
@@ -458,4 +481,3 @@
 
 </body>
 </html>
- 
