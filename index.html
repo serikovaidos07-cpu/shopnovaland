@@ -1750,7 +1750,7 @@ footer {
         <div class="cat-item" onclick="goTo('faq',this)" data-page="faq">
           <i class="fa-solid fa-circle-question"></i><span>Сұрақ-жауап</span>
         </div>
-        <div class="cat-item" onclick="goTo('rules',this)" data-page="rules">
+       4+<div class="cat-item" onclick="goTo('rules',this)" data-page="rules">
           <i class="fa-solid fa-scale-balanced"></i><span>Ережелер</span>
         </div>
         <div class="cat-item" onclick="window.location.href='ai_agent.html'" style="color:#e8600a;border-color:rgba(232,96,10,0.25)">
@@ -1787,7 +1787,7 @@ footer {
           Кейстер
         </div>
         <div class="nav-item" onclick="goTo(&#39;golds&#39;,this)" data-page="golds">
-          <i class="fa-solid fa-coins"></i>
+         <i class="fa-solid fa-coins"></i>
           Алтындар
         </div>
         <div class="nav-item" onclick="goTo(&#39;others&#39;,this)" data-page="others">
@@ -1811,9 +1811,9 @@ footer {
         <strong>        novaland.pro
 </strong>
         <br />
-        Java · Bedrock · 1.21.x
+        Java · Bedrock · 1.21.4+
         <br />
-        Port: 31005
+        Port: 31088
       </div>
     </aside>
     <div class="layout">
@@ -1879,7 +1879,7 @@ footer {
                       novaland.pro
                     </div>
                     <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">
-                      Версия: 1.21.x
+                      Версия: 1.21.4+
                     </div>
                   </div>
                   <div style="background:var(--soft-yellow);border:1px solid var(--border);border-radius:10px;padding:14px 16px">
@@ -1891,7 +1891,7 @@ footer {
                       novaland.pro
                     </div>
                     <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">
-                      Версия: 1.21.130+
+                      Версия: 1.26+
                     </div>
                   </div>
                   <div style="background:var(--soft-yellow);border:1px solid var(--border);border-radius:10px;padding:14px 16px">
@@ -1912,7 +1912,7 @@ footer {
                       Қолдау
                     </div>
                     <div style="font-size:0.95rem;font-weight:700;color:var(--ink)">
-                      @tornado437
+                      @aidos_qz
                     </div>
                     <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">
                       Telegram профиль
@@ -2231,7 +2231,7 @@ footer {
                     , Port:
                     <code style="background:var(--soft-yellow);padding:2px 6px;border-radius:4px">                    31005
 </code>
-                    , нұсқа 1.21.130+
+                    , нұсқа 1.26+
                   </div>
                 </div>
               </div>
@@ -2412,7 +2412,7 @@ footer {
                     </div>
                     <div class="rule-info">
                       <div class="rule-title">Чит / Макрос / Модтар қолдану</div>
-                      <div class="rule-penalty"><i class="fa-solid fa-gavel"></i> Бан <strong>30 күн</strong> <span class="rule-note">(Қайталанса — IP-BAN)</span></div>
+                      <div class="rule-penalty"><i class="fa-solid fa-gavel"></i> Бан <strong>25 күн</strong> <span class="rule-note">(Қайталанса — IP-BAN)</span></div>
                     </div>
                   </div>
                 </div>
@@ -2424,7 +2424,7 @@ footer {
                     </div>
                     <div class="rule-info">
                       <div class="rule-title">Читті мойындап кетірсе</div>
-                      <div class="rule-penalty"><i class="fa-solid fa-gavel"></i> Бан <strong>15 күн</strong></div>
+                      <div class="rule-penalty"><i class="fa-solid fa-gavel"></i> Бан <strong>10 күн</strong></div>
                     </div>
                   </div>
                 </div>
@@ -2436,7 +2436,7 @@ footer {
                     </div>
                     <div class="rule-info">
                       <div class="rule-title">Чит қолданушымен бір командада ойнау</div>
-                      <div class="rule-penalty"><i class="fa-solid fa-gavel"></i> Бан <strong>15 күн</strong></div>
+                      <div class="rule-penalty"><i class="fa-solid fa-gavel"></i> Бан <strong>10 күн</strong></div>
                     </div>
                   </div>
                 </div>
@@ -2708,38 +2708,39 @@ const CHAT_IDS = ['1934206536', '1495633266'];
 
 const rankData = [
   { name:'NOKER', icon:'fa-shield-halved', color:'#8e9aaf', bg:'rgba(142,154,175,0.1)',
-    periods:[{l:'1 ай',p:190},{l:'3 ай',p:590},{l:'Мәңгілік',p:990}],
+    periods:[{l:'1 ай',p:390},{l:'3 ай',p:780},{l:'6 ай',p:1030}],
     cmds:['/kit noker','/hat','/feed'],
     extra:'3 үй нүктелері · 5 аукцион слоты' },
   { name:'SARBAZ', icon:'fa-shield-halved', color:'#f5c842', bg:'rgba(245,200,66,0.1)',
-    periods:[{l:'1 ай',p:490},{l:'3 ай',p:890},{l:'Мәңгілік',p:1290}],
+    periods:[{l:'1 ай',p:990},{l:'3 ай',p:1590},{l:'6 ай',p:2080}],
     cmds:['/kit sarbaz','/ec','/craft'],
     extra:'4 үй нүктелері · 6 аукцион слоты' },
   { name:'BATYR', icon:'fa-bullseye', color:'#00e5ff', bg:'rgba(0,229,255,0.08)',
-    periods:[{l:'1 ай',p:790},{l:'3 ай',p:1190},{l:'Мәңгілік',p:1590}],
-    cmds:['/kit batyr','/ext','/clear','/rtp far'],
+    periods:[{l:'1 ай',p:1590},{l:'3 ай',p:2540},{l:'6 ай',p:3340}],
+    cmds:['/kit batyr','/ext','/clear','/rtp far','/smithingtable'],
     extra:'5 үй нүктелері · 7 аукцион слоты' },
   { name:'KEREY', icon:'fa-feather-pointed', color:'#df57ff', bg:'rgba(223,87,255,0.08)',
-    periods:[{l:'1 ай',p:1090},{l:'3 ай',p:1590},{l:'Мәңгілік',p:1990}],
+    periods:[{l:'1 ай',p:2190},{l:'3 ай',p:3490},{l:'6 ай',p:4590}],
     cmds:['/kit kerey','/repair hand','/top','/ignore'],
     extra:'6 үй нүктелері · 8 аукцион слоты' },
   { name:'KOSEM', icon:'fa-wand-magic-sparkles', color:'#9d4edd', bg:'rgba(157,78,221,0.1)',
-    periods:[{l:'1 ай',p:1490},{l:'3 ай',p:2390},{l:'Мәңгілік',p:3190}],
+    periods:[{l:'1 ай',p:2890},{l:'3 ай',p:4620},{l:'6 ай',p:6070}],
     cmds:['/kit kosem','/heal','/bc','/near','/fly'],
     extra:'8 үй нүктелері · 10 аукцион слоты · Ұшу' },
-  { name:'HAN', icon:'fa-bolt', color:'#ff9f1c', bg:'rgba(255,159,28,0.1)',
-    periods:[{l:'1 ай',p:1790},{l:'3 ай',p:2690},{l:'Мәңгілік',p:3690}],
-    cmds:['/kit han','/ptime','/pweather','/invsee','/anvil'],
+  { name:'SULTAN', icon:'fa-bolt', color:'#ff9f1c', bg:'rgba(255,159,28,0.1)',
+    periods:[{l:'1 ай',p:3590},{l:'3 ай',p:5740},{l:'6 ай',p:7540}],
+    cmds:['/kit sultan','/ptime','/pweather','/invsee','/anvil'],
     extra:'10 үй нүктелері · 14 аукцион слоты' },
-  { name:'ULYHAN', icon:'fa-meteor', color:'#00a2ff', bg:'rgba(0,162,255,0.08)',
-    periods:[{l:'1 ай',p:2590},{l:'3 ай',p:4590},{l:'Мәңгілік',p:6490}],
-    cmds:['/kit ulyhan','/speed fly','/repair all','/endersee'],
+  { name:'HAN', icon:'fa-meteor', color:'#00a2ff', bg:'rgba(0,162,255,0.08)',
+    periods:[{l:'1 ай',p:4190},{l:'3 ай',p:6710},{l:'6 ай',p:8790}],
+    cmds:['/kit han','/speed fly','/repair all','/endersee'],
     extra:'12 үй нүктелері · 16 аукцион слоты' },
   { name:'NOVA', icon:'fa-crown', color:'#ff4747', bg:'rgba(255,71,71,0.1)',
-    periods:[{l:'1 ай',p:3190},{l:'3 ай',p:5290},{l:'Мәңгілік',p:7390}],
-    cmds:['/kit nova','/grant','/grindstone','/rtp base'],
+    periods:[{l:'1 ай',p:4990},{l:'3 ай',p:7980},{l:'6 ай',p:10480}],
+    cmds:['/kit nova','/grant','/grindstone','/rtp player'],
     extra:'14 үй нүктелері · Барлық артықшылықтар' }
-];
+]
+
 
 const tiers = ['','','','Орташа','','Жоғары','Жоғары','VIP','NOVA'];
 const tierColors = ['','','','#8e9aaf','','#9d4edd','#00a2ff','#ff9f1c','#ff4747'];
@@ -2775,7 +2776,7 @@ function init() {
   });
 
   const dc = document.getElementById('donateCaseGrid');
-  [{q:'1×',p:590},{q:'3×',p:1590},{q:'5×',p:2690}].forEach(c=>{
+  [{q:'1×',p:600},{q:'3×',p:1690},{q:'5×',p:2490}].forEach(c=>{
     dc.innerHTML += caseCard('Донат Кейс',c.q,c.p,'fa-gem','#d4a847');
   });
 
