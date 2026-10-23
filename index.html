@@ -7,76 +7,137 @@
 <meta name="theme-color" content="#0a0610">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:wght@400;500;700&family=Rubik+Wet+Paint&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rubik:wght@400;500;700;800;900&family=Rubik+Wet+Paint&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0610;--bg2:#140c1e;--bg3:#1d1129;--bone:#f1e8d4;--mut:#b2a5c6;--pk:#ff7a1a;--em:#ffb347;--tox:#8dff3a;--bl:#e0344a;--line:rgba(255,160,70,.24);--r:14px}
+:root{--bg:#0a0610;--bg2:#140c1e;--bg3:#1d1129;--bone:#f1e8d4;--mut:#b2a5c6;--pk:#ff7a1a;--em:#ffb347;--tox:#8dff3a;--bl:#e0344a;--neon-p:#8a2be2;--line:rgba(255,160,70,.24);--r:18px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scrollbar-color:#6b3a16 var(--bg)}
-body{font:400 16px/1.6 Rubik,system-ui,sans-serif;background:var(--bg);color:var(--bone);min-height:100vh;min-height:100dvh;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;background:radial-gradient(900px 520px at 85% -5%,rgba(108,59,209,.30),transparent 60%),radial-gradient(700px 500px at 0 100%,rgba(255,122,26,.10),transparent 60%);pointer-events:none}
+body{font:400 16px/1.6 Rubik,system-ui,sans-serif;background:var(--bg);color:var(--bone);min-height:100vh;min-height:100dvh;overflow-x:hidden;position:relative}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(900px 520px at 85% -5%,rgba(108,59,209,.35),transparent 60%),radial-gradient(700px 500px at 0 100%,rgba(255,122,26,.15),transparent 60%);pointer-events:none;z-index:-2}
 #lamp{position:fixed;inset:0;pointer-events:none;z-index:50;background:radial-gradient(280px circle at var(--mx,50%) var(--my,30%),rgba(255,150,50,.12),transparent 70%)}
+
+/* ===== ТӨМЕННЕН ЖОҒАРЫҒА ҚАЛҚЫП КӨТЕРІЛЕТІН НҮКТЕЛЕР (PARTICLES) ===== */
+#particles-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.p-dot{position:absolute;bottom:-20px;border-radius:50%;background:rgba(255,122,26,0.7);box-shadow:0 0 10px rgba(255,122,26,0.9), 0 0 20px rgba(138,43,226,0.8);animation:particleFloat 8s linear infinite}
+@keyframes particleFloat{
+  0%{transform:translateY(0) scale(0.6);opacity:0}
+  15%{opacity:0.9}
+  85%{opacity:0.9}
+  100%{transform:translateY(-105vh) scale(1.2);opacity:0}
+}
+
 ::selection{background:var(--pk);color:#1a0b00}
 ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:#6b3a16;border-radius:9px}::-webkit-scrollbar-track{background:var(--bg)}
-a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 :focus-visible{outline:2px solid var(--em);outline-offset:3px;border-radius:6px}
 .ic{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:18px;padding:10px max(clamp(14px,4vw,40px),env(safe-area-inset-left),env(safe-area-inset-right));background:rgba(10,6,16,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:8px;text-decoration:none;font:800 1.1rem/1 Unbounded,Rubik,sans-serif;color:var(--bone)}
+
+/* HEADER */
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:18px;padding:12px max(clamp(14px,4vw,40px),env(safe-area-inset-left),env(safe-area-inset-right));background:rgba(10,6,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:8px;text-decoration:none;font:900 1.3rem/1 Unbounded,Rubik,sans-serif;color:var(--pk);text-shadow:0 0 15px rgba(255,122,26,.6)}
 .brand .ic{color:var(--pk);width:1.4em;height:1.4em}
-nav{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none}
+nav{display:flex;gap:4px;overflow-x:auto;flex:1;scrollbar-width:none}
 nav::-webkit-scrollbar{display:none}
-nav a{padding:8px 13px;text-decoration:none;color:var(--mut);font-weight:500;font-size:.92rem;white-space:nowrap;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
-nav a:hover{color:var(--bone)}nav a.on{color:var(--em);border-color:var(--pk)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border:0;border-radius:10px;background:var(--pk);color:#1a0b00;font-weight:700;text-decoration:none;transition:transform .15s,background .2s;box-shadow:0 6px 18px rgba(255,122,26,.28)}
-.btn:hover{background:var(--em);transform:translateY(-2px)}
+nav a{padding:8px 14px;text-decoration:none;color:var(--mut);font-weight:700;font-size:.95rem;white-space:nowrap;border-radius:10px;transition:all .2s ease}
+nav a:hover,nav a.on{color:#fff;background:rgba(138,43,226,.22);box-shadow:0 0 12px rgba(138,43,226,.4)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--pk),#ff3d00);color:#fff;font-weight:800;text-decoration:none;transition:transform .15s,background .2s,box-shadow .2s;box-shadow:0 6px 20px rgba(255,122,26,.35)}
+.btn:hover{background:linear-gradient(135deg,var(--em),#ff5500);transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,122,26,.5)}
 .btn.ghost{background:transparent;color:var(--bone);border:1px solid var(--line);box-shadow:none}
 .btn.ghost:hover{border-color:var(--pk);color:var(--em)}
 .btn.sm{padding:8px 14px;font-size:.88rem}
-.btn:disabled{opacity:.5;cursor:wait}
 .wrap{max-width:1200px;margin:0 auto;padding-inline:max(clamp(14px,4vw,40px),env(safe-area-inset-left),env(safe-area-inset-right))}
-/* hero */
+
+/* HERO */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
 .hero .scene{position:absolute;inset:auto 0 0 0;width:100%;height:100%;opacity:.95}
 .hero-in{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:start;padding:clamp(40px,8vw,90px) 0 clamp(150px,22vw,260px)}
-.hero h1{font:800 clamp(2.6rem,11.5vw,6rem)/1 Unbounded,Rubik,sans-serif;letter-spacing:-.02em;text-shadow:0 8px 40px rgba(255,122,26,.4)}
-.hero h2{font:400 clamp(1.5rem,3.2vw,2.5rem)/1.15 'Rubik Wet Paint',Rubik,sans-serif;color:var(--pk);margin:18px 0 12px}
-.hero p{max-width:46ch;color:var(--mut);margin:18px 0 24px}
+.hero h1{font:900 clamp(2.6rem,11.5vw,5.5rem)/1 Unbounded,Rubik,sans-serif;letter-spacing:-.02em;text-shadow:0 8px 40px rgba(255,122,26,.4)}
+.hero p{max-width:46ch;color:var(--mut);margin:18px 0 24px;font-size:1.05rem}
 .acts{display:flex;flex-wrap:wrap;gap:12px}
 .sign{justify-self:center;position:relative;width:min(280px,70vw);padding-top:70px;transform-origin:50% 0;animation:sway 5s ease-in-out infinite alternate}
 .sign i{position:absolute;top:0;width:2px;height:74px;background:repeating-linear-gradient(#8a7a66 0 6px,transparent 6px 9px)}
 .sign i:first-child{left:22%}.sign i:nth-child(2){right:22%}
-.plank{display:grid;gap:2px;text-align:center;padding:22px 18px;border-radius:10px;background:linear-gradient(160deg,#3a2112,#24130a);border:2px solid #5b351c;box-shadow:0 18px 40px rgba(0,0,0,.55)}
+.plank{display:grid;gap:2px;text-align:center;padding:22px 18px;border-radius:12px;background:linear-gradient(160deg,#3a2112,#24130a);border:2px solid #5b351c;box-shadow:0 18px 40px rgba(0,0,0,.6)}
 .plank b{font:400 clamp(4rem,9vw,5.6rem)/1 'Pirata One',serif;color:var(--pk)}
-.plank span{font-size:.9rem;color:var(--em);font-weight:500}
+.plank span{font-size:.9rem;color:var(--em);font-weight:600}
 @keyframes sway{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
-/* info */
+
+/* INFO CARDS */
 .info{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:-60px 0 56px;position:relative}
 .cell{position:relative;display:block;width:100%;font:inherit;color:inherit;text-align:left;text-decoration:none;padding:18px 20px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);transition:border-color .2s,transform .2s}.cell:hover{border-color:var(--pk);transform:translateY(-2px)}.cell .cp{position:absolute;top:16px;right:16px;opacity:.45;color:var(--mut)}
 .cell small{display:flex;align-items:center;gap:8px;color:var(--mut);font-size:.82rem}
 .cell small .ic{color:var(--pk)}
 .cell strong{display:block;font-size:1.25rem;margin-top:4px;overflow-wrap:anywhere}
 .cell em{font-style:normal;color:var(--mut);font-size:.82rem}
-/* pages */
+
+/* PAGES & GRID */
 .page{padding:44px 0 80px}
 .ph{margin-bottom:28px}
 .ph h1{font:400 clamp(2.2rem,5vw,3.6rem)/1.05 'Rubik Wet Paint',Rubik,sans-serif;color:var(--pk)}
 .ph p{color:var(--mut);max-width:60ch;margin-top:8px}
-.seg{display:inline-flex;gap:4px;padding:4px;margin-bottom:30px;background:var(--bg2);border:1px solid var(--line);border-radius:12px}
-.seg button{padding:9px 20px;border:0;background:none;border-radius:8px;color:var(--mut);font-weight:500}
-.seg button.on{background:var(--pk);color:#1a0b00;font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:22px}
-.stone{--c:#ff7a1a;position:relative;display:flex;flex-direction:column;padding:26px 20px 20px;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 14%,var(--bg3)),var(--bg2) 55%);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);border-radius:110px 110px 14px 14px;transition:transform .2s,border-color .2s}
-.stone:hover{transform:translateY(-5px);border-color:var(--c)}
-.stone .seal{display:grid;place-items:center;width:62px;height:62px;margin:0 auto 10px;border-radius:50%;background:color-mix(in srgb,var(--c) 18%,#0a0610);border:1px solid var(--c);color:var(--c);font-size:1.7rem}
-.stone h3{text-align:center;font:400 2rem/1 'Pirata One',serif;color:var(--c);letter-spacing:.5px}
-.stone ul{list-style:none;margin:14px 0 8px;display:grid;gap:5px;font-size:.88rem}
+.seg{display:inline-flex;gap:6px;padding:6px;margin-bottom:30px;background:var(--bg2);border:1px solid var(--line);border-radius:14px}
+.seg button{padding:10px 22px;border:0;background:none;border-radius:10px;color:var(--mut);font-weight:700;transition:all .2s}
+.seg button.on{background:var(--pk);color:#fff;box-shadow:0 4px 15px rgba(255,122,26,.4)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:24px}
+
+/* ===== 2-ФОТОДАҒЫ ТАУАР КАРТОЧКАСЫ МЕН НЕОН АНИМАЦИЯСЫ (STONE/CARD) ===== */
+.stone{
+  --c:#ff7a1a;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:26px 20px 22px;
+  background:linear-gradient(180deg, color-mix(in srgb,var(--c) 14%,var(--bg3)), var(--bg2) 65%);
+  border:2px solid color-mix(in srgb,var(--c) 40%,#5a189a);
+  border-radius:24px;
+  transition:all .35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* МЫШҚАНДЫ АПАРҒАНДАҒЫ/БАСҚАНДАҒЫ НЕОН АНИМАЦИЯСЫ */
+.stone:hover, .stone:focus-within{
+  transform:translateY(-8px) scale(1.02);
+  border-color:var(--neon-p);
+  box-shadow:0 0 25px rgba(138,43,226,0.6), 0 0 50px rgba(255,122,26,0.35);
+}
+
+.stone .badge-status{
+  position:absolute;top:14px;left:16px;
+  padding:3px 10px;border-radius:20px;
+  background:rgba(138,43,226,0.25);border:1px solid #8a2be2;
+  color:#d8b4fe;font-size:0.7rem;font-weight:900;letter-spacing:1px;text-transform:uppercase;
+}
+
+.stone .seal{
+  display:grid;place-items:center;
+  width:72px;height:72px;margin:12px auto 12px;
+  border-radius:22px;
+  background:color-mix(in srgb,var(--c) 20%,#0a0610);
+  border:1px solid var(--c);color:var(--c);font-size:2rem;
+  box-shadow:0 0 20px color-mix(in srgb,var(--c) 30%,transparent);
+}
+.stone h3{text-align:center;font:900 1.8rem/1 Rubik,sans-serif;color:#fff;letter-spacing:1px;margin-bottom:8px}
+.stone ul{list-style:none;margin:10px 0;display:grid;gap:6px;font-size:.88rem}
 .stone li{display:flex;gap:8px;align-items:center;color:var(--bone)}
 .stone li .ic{color:var(--c);width:1em;height:1em}
-.stone .ex{font-size:.8rem;color:var(--mut);margin-bottom:14px;flex:1}
-.pr{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.stone .ex{font-size:.82rem;color:var(--mut);margin-bottom:14px;flex:1}
+.pr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08)}
 .pr s{color:var(--mut);font-size:.9rem}
-.pr b{font-size:1.5rem;font-weight:700}
-.off{position:absolute;top:14px;right:12px;padding:2px 8px;border-radius:6px;background:var(--bl);font-size:.75rem;font-weight:700;color:#fff}
+.pr b{font-size:1.6rem;font-weight:900;color:var(--pk)}
+.off{position:absolute;top:14px;right:14px;padding:3px 8px;border-radius:8px;background:var(--bl);font-size:.78rem;font-weight:900;color:#fff}
+
+.stone .btn-card{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px;border-radius:14px;
+  background:linear-gradient(135deg, var(--pk), #ff2200);
+  color:#fff;font-weight:900;font-size:1rem;text-transform:uppercase;
+  box-shadow:0 6px 18px rgba(255,34,0,0.35);
+  transition:all .2s ease;
+}
+.stone .btn-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,34,0,0.6)}
+
+/* OTHERS & CALC */
 .sub{display:flex;align-items:center;gap:10px;margin:34px 0 16px;font:400 1.9rem/1 'Pirata One',serif}
 .sub .ic{color:var(--pk)}
 .item{display:flex;flex-direction:column;gap:6px;padding:22px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r)}
@@ -89,7 +150,8 @@ nav a:hover{color:var(--bone)}nav a.on{color:var(--em);border-color:var(--pk)}
 .presets button:hover{border-color:var(--pk);color:var(--em)}
 .tot{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;color:var(--mut)}
 .tot b{font:400 2.4rem/1 'Pirata One',serif;color:var(--pk)}
-/* faq + rules */
+
+/* FAQ & RULES */
 details{background:var(--bg2);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
 summary{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;font-weight:500;list-style:none}
 summary::-webkit-details-marker{display:none}
@@ -107,18 +169,18 @@ summary .ic{transition:transform .2s;color:var(--pk)}details[open] summary .ic{t
 .warn .ic{color:var(--bl);width:1.4em;height:1.4em;margin-top:2px}
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:.85rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
-/* modal */
-#ov{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:16px;background:rgba(5,2,10,.82)}
+
+/* MODAL */
+#ov{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:16px;background:rgba(5,2,10,.85)}
 #ov.open{display:grid}
-.mod{width:min(460px,100%);max-height:92vh;overflow:auto;padding:26px;background:var(--bg2);border:1px solid var(--pk);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.7);animation:pop .25s cubic-bezier(.16,1,.3,1)}
+.mod{width:min(460px,100%);max-height:92vh;overflow:auto;padding:26px;background:var(--bg2);border:2px solid var(--neon-p);border-radius:24px;box-shadow:0 0 50px rgba(138,43,226,.5);animation:pop .25s cubic-bezier(.16,1,.3,1)}
 @keyframes pop{from{transform:translateY(20px) scale(.97);opacity:0}}
 .mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.mh h2{font:400 1.9rem/1 'Pirata One',serif}
+.mh h2{font:400 1.9rem/1 'Pirata One',serif;color:var(--pk)}
 .x{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line);background:none;border-radius:10px}
 .dots{display:flex;gap:6px;margin-bottom:18px}.dots i{flex:1;height:4px;border-radius:4px;background:var(--bg3)}.dots i.on{background:var(--pk)}
 .mod label{display:grid;gap:6px;margin:14px 0;font-size:.88rem;color:var(--mut)}
 .mod input[type=text]{padding:12px 14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--bone);font:500 1rem Rubik}
-.mod .btn{width:100%}.mod .row{display:flex;gap:10px;margin-top:16px}
 .chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .chip{display:grid;gap:2px;padding:10px 6px;border:1px solid var(--line);background:none;border-radius:10px;font-size:.82rem;color:var(--mut)}
 .chip b{color:var(--bone);font-size:.95rem}.chip.on{border-color:var(--pk);background:rgba(255,122,26,.12)}
@@ -128,7 +190,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 .rate{display:flex;gap:6px;justify-content:center;margin:12px 0 18px}
 .rate button{border:0;background:none;color:var(--mut);font-size:1.7rem}.rate button.on{color:var(--pk)}
 .done{text-align:center}.done .big{width:70px;height:70px;margin:0 auto 12px;display:grid;place-items:center;border-radius:50%;background:rgba(141,255,58,.12);color:var(--tox);font-size:2rem}
-#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));max-width:calc(100vw - 28px);z-index:200;display:flex;gap:8px;align-items:center;padding:12px 18px;background:var(--bg3);border:1px solid var(--pk);border-radius:10px;transform:translate(-50%,90px);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));max-width:calc(100vw - 28px);z-index:200;display:flex;gap:8px;align-items:center;padding:12px 18px;background:var(--bg3);border:2px solid var(--neon-p);border-radius:12px;transform:translate(-50%,90px);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:0 0 30px rgba(138,43,226,.5)}
 #toast.show{transform:translate(-50%,0)}
 .burger{display:none;margin-left:auto;place-items:center;width:44px;height:44px;border:1px solid var(--line);background:none;border-radius:10px;font-size:1.3rem}
 #drw{position:fixed;inset:0;z-index:35;display:none;flex-direction:column;gap:8px;padding:76px max(clamp(14px,4vw,40px),env(safe-area-inset-left),env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom));background:rgba(10,6,16,.97);overflow:auto;animation:rise .25s cubic-bezier(.16,1,.3,1)}
@@ -146,16 +208,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 @keyframes flick{0%,100%{opacity:1}44%{opacity:.5}48%{opacity:1}80%{opacity:.7}84%{opacity:1}}
 @keyframes glow{to{transform:scale(1.12);opacity:.8}}
 .stone:not(.open) li:nth-child(n+4){display:none}
-.more{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 auto 12px;padding:4px 8px;border:0;background:none;color:var(--mut);font-size:.82rem}
+.more{display:flex;align-items:center;justify-content:center;gap:6px;margin:8px auto 12px;padding:4px 8px;border:0;background:none;color:var(--mut);font-size:.82rem}
 .more:hover{color:var(--em)}.more .mc,.stone.open .more .mo{display:none}.stone.open .more .mc{display:inline}
 .more .ic{transition:transform .2s}.stone.open .more .ic{transform:rotate(180deg)}
 .calc input[type=range]{padding:0;margin:0 0 18px;border:0;background:none;accent-color:var(--pk);height:28px}
 .steps-s{padding-bottom:80px}
 .steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
 .steps li{position:relative;padding-top:48px;counter-increment:s}
-.steps li::before{content:counter(s);position:absolute;top:0;left:0;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--pk);color:#1a0b00;font-weight:700}
+.steps li::before{content:counter(s);position:absolute;top:0;left:0;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--pk);color:#fff;font-weight:700}
 .steps li:not(:last-child)::after{content:"";position:absolute;top:16px;left:46px;right:-6px;border-top:2px dashed var(--line)}
 .steps b{display:block}.steps span{color:var(--mut);font-size:.88rem}
+
 @media(max-width:820px){
 .hero-in{grid-template-columns:1fr;justify-items:center;text-align:center;gap:14px;padding-top:24px}
 .hero-in>div:first-child{display:flex;flex-direction:column;align-items:center;width:100%}
@@ -172,13 +235,13 @@ nav#nav{display:none}.burger{display:grid}.top{gap:8px}
 .steps{grid-template-columns:1fr 1fr;gap:26px 16px;text-align:center}.steps li::before{left:50%;transform:translateX(-50%)}.steps li::after{display:none!important}
 .faqw .acts{justify-content:center}footer .wrap{justify-content:center;text-align:center}}
 @media(max-width:480px){.steps{grid-template-columns:1fr}.tot b{font-size:2rem}}
-@media(max-width:560px){#ov{padding:0;place-items:end center}.mod{width:100%;max-height:92vh;max-height:92dvh;border-radius:18px 18px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom));animation:sheet .3s cubic-bezier(.16,1,.3,1)}.card{flex-wrap:wrap;justify-content:center;text-align:center}.card span{font-size:1.05rem}}
-@keyframes sheet{from{transform:translateY(100%)}}
-@media(pointer:coarse){.btn,.seg button,.presets button,.x{min-height:44px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
+
+<!-- НҮКТЕЛЕР (PARTICLES) КОНТЕЙНЕРІ -->
+<div id="particles-bg"></div>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="i-pumpkin" viewBox="0 0 24 24"><path d="M12 6.5c-1.2-1.4-1.2-3 .2-4.5"/><path d="M12 6.5C6 5.5 2.5 9 2.5 13.5S6 21.5 12 21.5s9.500-3.500 9.500-8S18 5.500 12 6.500z"/><path d="M8 12.500l1.800 1.800M16 12.500l-1.800 1.800M8.500 17.500c2 1.400 5 1.400 7 0"/></symbol>
 <symbol id="i-skull" viewBox="0 0 24 24"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="m12.500 17-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.560-3.250 8 8 0 1 0-11.120 0A2 2 0 0 0 8 20"/></symbol>
@@ -249,16 +312,60 @@ const FAQ=[
  ['Серверге қалай қосылуға болады?',`<b>Java:</b> мекенжайға <b>${JAVA_IP}</b> жазыңыз, нұсқа 1.21.x<br><b>Bedrock:</b> IP <b>${JAVA_IP}</b>, порт <b>${BEDROCK_PORT}</b>, нұсқа 1.26+`],
  ['Алтынды қалай пайдалануға болады?',`Алтын — серверлік валюта. Титулдар мен /shop дүкеніндегі арнайы заттарға жұмсауға болады. 1 алтын = ${GOLD_RATE} ₸.`]
 ];
-const RULES=[
- ['І бөлім · Чат және қарым-қатынас',[['1.1','Спам / Флуд / Капс','Мут 15 минут'],['1.2','Қайыршылық (ресурс/ақша сұрау)','Мут 20 минут'],['1.3','Мутты айналып өту (хабарландыру арқылы)','Бан 1 сағат'],['1.4','Әдейі спам ұйымдастыру','Мут 1 сағат'],['1.5','Жарнама (басқа жобаларды насихаттау)','Мәңгілік бан',1],['1.6','Боқтау (балағат сөздер)','Мут 30 минут'],['1.7','Әкімшілік жұмысын талқылау','Мут 2 сағат'],['1.8','Тіл, дін, отбасына тіл тигізу','Мут 6 сағат'],['1.9','Өзін әкімшілік ретінде таныстыру (фейк)','Мут 2 күн'],['1.10','Әкімшілікке өтірік айту','Бан 1 күн']]],
- ['ІІ бөлім · Ойын процесі',[['2.1','Чит / Макрос / Модтар қолдану','Бан 25 күн, қайталанса IP-BAN'],['2.2','Читті мойындап кетірсе','Бан 10 күн'],['2.3','Чит қолданушымен бір командада ойнау','Бан 10 күн'],['2.5','Дюп (заттарды көбейту)','Мәңгілік бан + қара тізім',1],['2.6','Лаг-машина немесе зиянды механизмдер','Мәңгілік бан',1],['2.7','Аккаунт сату / беру / бұзу','IP-BAN',1],['2.8','Әкімшілікке немесе медиаға кедергі жасау','Бан 30 минут'],['2.9','Балағат никпен ойнау','Ескерту / мәңгілік бан'],['3.0','Тексеруден (проверка) қашу','Бан 30 күн']]]
+const RULES = [
+  ['І бөлім · Чат және қарым-қатынас', [
+    ['1.1', 'Спам / Флуд / Капс', 'Мут 15 минут'],
+    ['1.2', 'Қайыршылық', 'Мут 10 минут'],
+    ['1.3', 'Мутты айналып өту', 'Бан 10 минут'],
+    ['1.4', 'Твинк арқылы жазаны айналып өту', 'Бан'],
+    ['1.5', 'Жарнама', 'Бан', 1],
+    ['1.6', 'Боқтау (балағат сөздер)', 'Мут 30 минут'],
+    ['1.7', 'Әкімшілік жұмысын талқылау', 'Мут 2 сағат'],
+    ['1.8', 'Тіл, дін, отбасына тіл тигізу', 'Мут 1 сағат'],
+    ['1.9', 'Әкімшілікке ұқсас ник қою', 'Бан'],
+    ['1.10', 'Әкімшілікке немесе ресми медиаға кедергі жасау', 'Ескерту / Бан 10 минут'],
+    ['1.11', 'Әдепсіз және сексуалды сипаттағы сөздер', 'Мут 1 сағат']
+  ]],
+  ['ІІ бөлім · Ойын процесі', [
+    ['2.1', 'Чит / Макрос / Модтар қолдану', 'Бан 25 күн'],
+    ['2.2', 'Читті мойындап кетірсе', 'Бан 10 күн'],
+    ['2.3', 'Чит қолданушымен бір командада ойнау', 'Бан 5 күн'],
+    ['2.4', 'Дюп', 'Қара тізім', 1],
+    ['2.5', 'Лаг машина немесе зиянды механизмдер', 'Қара тізім', 1],
+    ['2.6', 'Аккаунт бұзу / Зиян келтіру', 'Бан 5 күн', 1],
+    ['2.7', 'Тексеруден қашу', 'Бан 30 күн'],
+    ['2.8', 'Балағат никпен ойнау', 'Ескерту / Бан'],
+    ['2.9', 'Читті сақтау', 'Бан 15 күн'],
+    ['2.10', 'Ойын валютасын сату / сатып алу / айырбастау', 'Бан 15 күн']
+  ]]
 ];
+/* ===== НҮКТЕЛЕРДІ ГЕНЕРАЦИЯЛАУ (PARTICLES) ===== */
+function initParticles(){
+  const c = document.getElementById('particles-bg');
+  if(!c) return;
+  c.innerHTML = '';
+  const count = 35;
+  for(let i = 0; i < count; i++){
+    const d = document.createElement('div');
+    d.className = 'p-dot';
+    const sz = Math.random() * 4 + 2;
+    d.style.width = sz + 'px';
+    d.style.height = sz + 'px';
+    d.style.left = Math.random() * 100 + '%';
+    d.style.animationDuration = (Math.random() * 6 + 5) + 's';
+    d.style.animationDelay = (Math.random() * 5) + 's';
+    c.appendChild(d);
+  }
+}
+document.addEventListener('DOMContentLoaded', initParticles);
+
 /* ===== КӨМЕКШІЛЕР ===== */
 const $=s=>document.querySelector(s), fmt=n=>Number(n).toLocaleString('ru-RU'), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ic=(n,c='')=>`<svg class="ic ${c}"><use href="#i-${n}"/></svg>`;
 let per=0, goldAmt=100, tt;
 function toast(m){$('#tm').textContent=m;$('#toast').classList.add('show');clearTimeout(tt);tt=setTimeout(()=>$('#toast').classList.remove('show'),2600)}
 function copy(t,m){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(m||'Көшірілді')).catch(()=>toast('Көшіру мүмкін болмады'))}
+
 /* ===== БЕТТЕР ===== */
 const SCENE=`<svg class="scene" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><radialGradient id="mg"><stop offset="0" stop-color="#ffb347" stop-opacity=".55"/><stop offset="1" stop-color="#ff7a1a" stop-opacity="0"/></radialGradient></defs>
 <circle class="halo" cx="930" cy="120" r="170" fill="url(#mg)"/><circle cx="930" cy="120" r="62" fill="#ffe7bf"/><circle cx="912" cy="104" r="9" fill="#efca93"/><circle cx="950" cy="140" r="13" fill="#efca93"/><circle cx="940" cy="98" r="5" fill="#efca93"/>
@@ -268,6 +375,7 @@ const SCENE=`<svg class="scene" viewBox="0 0 1200 400" preserveAspectRatio="xMid
 <path d="M1010 330V268h26v-24h20v24h26v62zM60 330c10-30 8-60 0-92M60 262l-26-22M60 282l22-26M60 250l16-30"/></g>
 <g fill="#ff9a2e" class="win"><rect x="656" y="206" width="14" height="22" rx="2"/><rect x="702" y="206" width="14" height="22" rx="2"/><rect x="679" y="252" width="16" height="26" rx="8"/><rect x="140" y="252" width="9" height="14" rx="2"/><rect x="262" y="268" width="9" height="14" rx="2"/></g>
 <g fill="#05030a" class="bats"><path id="b" d="M0 0c6-9 14-9 20 0 6-9 14-9 20 0-6-3-10 1-20 8-10-7-14-11-20-8z" transform="translate(300 90) scale(1.2)"/><use href="#b" transform="translate(190 60) scale(.8)"/><use href="#b" transform="translate(560 40) scale(1.5)"/><use href="#b" transform="translate(800 190) scale(.9)"/></g></svg>`;
+
 function home(){return `<section class="hero">${SCENE}<div class="wrap hero-in"><div>
 <h1>NovaLand</h1>
 <p>Привилегиялар, кейстер мен алтынға 20% жеңілдік. Қараңғы түн біткенше ғана жұмыс істейді, сондықтан тезірек үлгеріңіз.</p>
@@ -279,20 +387,47 @@ function home(){return `<section class="hero">${SCENE}<div class="wrap hero-in">
 <button class="cell" data-copy="${BEDROCK_PORT}"><small>${ic('net')}Bedrock порт</small><strong>${BEDROCK_PORT}</strong><em>UDP протоколы</em>${ic('copy','cp')}</button>
 <a class="cell" target="_blank" rel="noopener" href="https://t.me/${TG}"><small>${ic('send')}Қолдау</small><strong>@${TG}</strong><em>Telegram профиль</em>${ic('send','cp')}</a></div>
 <section class="steps-s"><h2 class="sub">${ic('cart')}Қалай сатып алуға болады</h2><ol class="steps"><li><b>Донатты таңдаңыз</b><span>Привилегия, кейс немесе алтынды таңдап, ник-нейміңізді жазыңыз.</span></li><li><b>Kaspi арқылы төлеңіз</b><span>Көрсетілген картаға соманы аударыңыз.</span></li><li><b>Чекті жүктеңіз</b><span>Скриншот немесе PDF чекті жіберіп, растаңыз.</span></li><li><b>Донатты алыңыз</b><span>Модерация тексергеннен кейін 1–4 сағат ішінде беріледі.</span></li></ol></section></div>`}
+
 const head=(t,p)=>`<div class="ph"><h1>${t}</h1><p>${p}</p></div>`;
-function rankCards(){return R.map((r,i)=>`<article class="stone" style="--c:${r.c}"><span class="off">−20%</span><div class="seal">${ic(r.ic)}</div><h3>${r.n}</h3>
-<ul>${r.cmds.map(c=>`<li>${ic('check')}${c}</li>`).join('')}</ul>${r.cmds.length>3?`<button class="more" data-more aria-expanded="false"><span class="mo">Барлық командалар</span><span class="mc">Жасыру</span>${ic('chev')}</button>`:''}<p class="ex">${r.ex}</p>
-<div class="pr"><b>${fmt(r.p[per])} ₸</b><s>${fmt(r.o[per])} ₸</s></div><button class="btn" data-buy="rank:${i}">${ic('cart')}Сатып алу</button></article>`).join('')}
+
+/* 2-ФОТОДАҒЫДАЙ НЕОН АНИМАЦИЯСЫ БАР КАРТОЧКАЛАР (RANK CARDS) */
+function rankCards(){return R.map((r,i)=>`<article class="stone" style="--c:${r.c}">
+<span class="badge-status"></span>
+<span class="off">−20%</span>
+<div class="seal">${ic(r.ic)}</div>
+<h3>${r.n}</h3>
+<ul>${r.cmds.map(c=>`<li>${ic('check')}${c}</li>`).join('')}</ul>
+${r.cmds.length>3?`<button class="more" data-more aria-expanded="false"><span class="mo">Барлық командалар</span><span class="mc">Жасыру</span>${ic('chev')}</button>`:''}
+<p class="ex">${r.ex}</p>
+<div class="pr"><b>${fmt(r.p[per])} ₸</b><s>${fmt(r.o[per])} ₸</s></div>
+<button class="btn-card" data-buy="rank:${i}">${ic('cart')} САТЫП АЛУ</button>
+</article>`).join('')}
+
 function donates(){return `<div class="wrap page">${head('Привилегиялар','Мерзімді таңдаңыз: бағалар барлық карточкада бірден өзгереді. Барлығында 20% жеңілдік бар.')}
 <div class="seg" role="tablist">${PL.map((l,i)=>`<button role="tab" class="${i==per?'on':''}" data-per="${i}">${l}</button>`).join('')}</div><div class="grid" id="rg">${rankCards()}</div></div>`}
-function caseCards(t){const c=CASES[t];return c.l.map((x,i)=>`<article class="stone" style="--c:${t=='d'?'#ff7a1a':'#f5c842'};border-radius:var(--r)"><span class="off">−20%</span><div class="seal">${ic(c.ic)}</div><h3>${c.n} ${x[0]}×</h3><div class="ex" style="margin-top:14px"></div><div class="pr"><b>${fmt(x[1])} ₸</b><s>${fmt(x[2])} ₸</s></div><button class="btn" data-buy="case:${t}:${i}">${ic('cart')}Сатып алу</button></article>`).join('')}
+
+function caseCards(t){const c=CASES[t];return c.l.map((x,i)=>`<article class="stone" style="--c:${t=='d'?'#ff7a1a':'#f5c842'}">
+<span class="badge-status"></span>
+<span class="off">−20%</span>
+<div class="seal">${ic(c.ic)}</div>
+<h3>${c.n} ${x[0]}×</h3>
+<div class="ex" style="margin-top:14px"></div>
+<div class="pr"><b>${fmt(x[1])} ₸</b><s>${fmt(x[2])} ₸</s></div>
+<button class="btn-card" data-buy="case:${t}:${i}">${ic('cart')} САТЫП АЛУ</button>
+</article>`).join('')}
+
 function cases(){return `<div class="wrap page">${head('Кейстер','Сирек заттар мен сыйлықтар. Кейстерге де 20% жеңілдік.')}<div class="sub">${ic('gem')}Донат кейстер</div><div class="grid">${caseCards('d')}</div><div class="sub">${ic('coins')}Алтын кейстер</div><div class="grid">${caseCards('g')}</div></div>`}
+
 function golds(){return `<div class="wrap page">${head('Алтын сатып алу','Серверлік валюта: 1 алтын = '+GOLD_RATE+' ₸.')}<div class="calc"><label for="ga" style="color:var(--mut)">Қанша алтын керек?</label><input id="ga" type="number" min="1" inputmode="numeric" value="${goldAmt}"><input id="gr" type="range" min="100" max="20000" step="100" value="${Math.min(Math.max(goldAmt,100),20000)}" aria-label="Алтын мөлшері">
 <div class="presets">${[100,500,1000,2500,5000,10000].map(v=>`<button data-gp="${v}">${fmt(v)}</button>`).join('')}</div>
 <div class="tot"><span><span id="gn">${fmt(goldAmt)}</span> алтын</span><b><span id="gp">${fmt(goldAmt*GOLD_RATE)}</span> ₸</b></div><button class="btn" data-buy="gold">${ic('cart')}Сатып алу</button></div></div>`}
+
 function others(){return `<div class="wrap page">${head('Қосымша қызметтер','Арнайы қызметтер мен параметрлер.')}<div class="grid">${OTHERS.map((o,i)=>`<article class="item"><div class="seal">${ic(o.ic)}</div><h3>${o.n}</h3><p>${o.d}</p><div class="pr"><b>${fmt(o.p)} ₸</b></div><button class="btn" data-buy="other:${i}">${ic('cart')}Сатып алу</button></article>`).join('')}</div></div>`}
+
 function faq(){return `<div class="wrap page faqw">${head('Сұрақ-жауап','Жиі қойылатын сұрақтар мен нұсқаулықтар.')}${FAQ.map(f=>`<details><summary>${f[0]}${ic('chev')}</summary><div class="ans">${f[1]}</div></details>`).join('')}<div class="acts" style="margin-top:22px"><a class="btn" target="_blank" rel="noopener" href="https://t.me/${TG}">${ic('send')}Telegram-да жазу</a></div></div>`}
+
 function rules(){return `<div class="wrap page faqw">${head('Ережелер','Серверде ойнамас бұрын барлық ережелерді оқып шығыңыз.')}${RULES.map(s=>`<section class="box"><h2>${s[0]}</h2>${s[1].map(r=>`<div class="rule"><code>${r[0]}</code><span>${r[1]}</span><span class="tag ${r[3]?'hard':''}">${r[2]}</span></div>`).join('')}</section>`).join('')}<div class="warn">${ic('alert')}<p>Модерация ескертусіз жаза қолдануға құқылы. Барлық ойыншылар, тіпті донат иелері де ережеге бағынады. Бұзушылықты байқасаңыз, хабарлаңыз: @tornado437</p></div></div>`}
+
 const NI={home:'pumpkin',donates:'crown',cases:'gem',golds:'coins',others:'box',faq:'ghost',rules:'gavel'};
 $('#drw').innerHTML=[...document.querySelectorAll('#nav a')].map(a=>`<a href="${a.getAttribute('href')}" data-p="${a.dataset.p}">${ic(NI[a.dataset.p])}${a.textContent}</a>`).join('');
 function setMenu(o){$('#drw').classList.toggle('open',o);$('#bg').setAttribute('aria-expanded',o);$('#bg use').setAttribute('href',o?'#i-x':'#i-menu');document.body.style.overflow=o?'hidden':''}
@@ -300,6 +435,7 @@ addEventListener('resize',()=>{if(innerWidth>820)setMenu(false)});
 const PAGES={home,donates,cases,golds,others,faq,rules};
 function route(){const k=location.hash.replace(/^#\/?/,'')||'home',p=PAGES[k]?k:'home';$('#view').innerHTML=PAGES[p]();document.querySelectorAll('#nav a,#drw a').forEach(a=>a.classList.toggle('on',a.dataset.p===p));setMenu(false);scrollTo(0,0)}
 addEventListener('hashchange',route);route();
+
 /* ===== САТЫП АЛУ ===== */
 let M=null;
 const cost=()=>M.rank!=null?R[M.rank].p[M.per]:M.price;
@@ -320,9 +456,11 @@ function draw(){const dots=`<div class="dots">${[1,2,3].map(i=>`<i class="${i<=M
  else b=`${hd('Дайын')}${dots}<div class="done"><div class="big">${ic('check')}</div><p style="color:var(--mut)">Мәліметтер жіберілді. Модерация тексергеннен кейін <b style="color:var(--em)">1–4 сағат ішінде</b> донатыңыз беріледі.</p>
 <p style="margin-top:16px;font-size:.9rem">Пікір қалдырыңыз:</p><div class="rate">${[1,2,3,4,5].map(i=>`<button data-rate="${i}" class="${i<=M.rate?'on':''}" aria-label="${i}">${ic('flame')}</button>`).join('')}</div><a class="btn" target="_blank" rel="noopener" href="https://t.me/${TG}">${ic('send')}Telegram-да хабарласу</a></div>`;
  $('#mod').innerHTML=b;const n=$('#nick');if(n)n.focus()}
+
 async function tg(text,file){for(const id of CHAT_IDS){try{if(file){const f=new FormData();f.append('chat_id',id);f.append('caption',text);f.append('parse_mode','HTML');const pdf=file.type=='application/pdf';f.append(pdf?'document':'photo',file);await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/${pdf?'sendDocument':'sendPhoto'}`,{method:'POST',body:f})}else await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text,parse_mode:'HTML'})})}catch(e){console.warn('TG',e)}}}
 async function submit(){const d=new Date().toLocaleString('kk-KZ',{timeZone:'Asia/Almaty',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
  const cap=`<b>NOVALAND: ЖАҢА ТАПСЫРЫС</b>\n\nНик: <b>${esc(M.nick)}</b>\nДонат: <b>${esc(M.name)}${M.rank!=null?' ('+PL[M.per]+')':''}</b>\n`+(M.gold?`Алтын: <b>${M.gold} дана</b>\n`:'')+`Сумма: <b>${cost()} ₸</b> (Хэллоуин −20%)\nКүні: ${d}`;await tg(cap,M.file)}
+
 /* ===== ОҚИҒАЛАР ===== */
 document.addEventListener('click',e=>{if(e.target.closest('#bg')){setMenu(!$('#drw').classList.contains('open'));return}if(e.target.closest('#drw a'))setMenu(false);const t=e.target.closest('[data-buy],[data-per],[data-gp],[data-copy],[data-close],[data-mper],[data-go],[data-rate],[data-more]');
  if(e.target.id=='ov'){closeM();return}if(!t)return;const d=t.dataset;
