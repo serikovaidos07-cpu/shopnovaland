@@ -313,7 +313,7 @@ function closeM(){$('#ov').classList.remove('open')}
 function draw(){const dots=`<div class="dots">${[1,2,3].map(i=>`<i class="${i<=M.step?'on':''}"></i>`).join('')}</div>`;
  const hd=t=>`<div class="mh"><h2>${t}</h2><button class="x" data-close aria-label="Жабу">${ic('x')}</button></div>`;let b='';
  if(M.step==1)b=`${hd(esc(M.name)+(M.gold?' · '+fmt(M.gold):''))}${dots}${M.rank!=null?`<div class="chips">${R[M.rank].p.map((p,i)=>`<button class="chip ${i==M.per?'on':''}" data-mper="${i}">${PL[i]}<b>${fmt(p)} ₸</b></button>`).join('')}</div>`:`<div class="tot"><span>Төленетін сома</span><b>${fmt(cost())} ₸</b></div>`}
-<label>Ойын НИК-нейміңіз<input type="text" id="nick" value="${esc(M.nick)}" placeholder="Steve123" autocomplete="off"></label><button class="btn" data-go="2">Жалғастыру</button>`;
+<label>Ойын НИК-нейміңіз<input type="text" id="nick" value="${esc(M.nick)}" placeholder="AidosCraft" autocomplete="off"></label><button class="btn" data-go="2">Жалғастыру</button>`;
  else if(M.step==2)b=`${hd('Төлем')}${dots}<p style="color:var(--mut);font-size:.9rem">1. Kaspi-ден <b style="color:var(--em)">${fmt(cost())} ₸</b> аударыңыз:</p><div class="card"><span>${CARD.replace(/(\d{4})(?=\d)/g,'$1 ')}</span><button class="btn sm" data-copy="${CARD}">${ic('copy')}Көшіру</button></div>
 <p style="color:var(--mut);font-size:.9rem;margin-bottom:10px">2. Скриншот немесе PDF чекті жүктеңіз:</p><label class="drop">${ic('up')}<span id="fn">${M.file?esc(M.file.name):'Файлды таңдаңыз · PNG, JPG, PDF · 10MB'}</span><input type="file" id="file" accept="image/*,.pdf"></label>
 <div class="row"><button class="btn ghost" data-go="1" style="width:40%">Артқа</button><button class="btn" id="ok" data-go="3">Растау</button></div>`;
