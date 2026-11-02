@@ -60,7 +60,7 @@ nav a:hover,nav a.on{color:#fff;background:rgba(138,43,226,.22);box-shadow:0 0 1
 .sign i{position:absolute;top:0;width:2px;height:74px;background:repeating-linear-gradient(#8a7a66 0 6px,transparent 6px 9px)}
 .sign i:first-child{left:22%}.sign i:nth-child(2){right:22%}
 .plank{display:grid;gap:2px;text-align:center;padding:22px 18px;border-radius:12px;background:linear-gradient(160deg,#3a2112,#24130a);border:2px solid #5b351c;box-shadow:0 18px 40px rgba(0,0,0,.6)}
-.plank b{font:400 clamp(4rem,9vw,5.6rem)/1 'Pirata One',serif;color:var(--pk)}
+.plank b{font:400 clamp(3rem,7vw,4.5rem)/1 'Pirata One',serif;color:var(--pk)}
 .plank span{font-size:.9rem;color:var(--em);font-weight:600}
 @keyframes sway{from{transform:rotate(-3.5deg)}to{transform:rotate(3.5deg)}}
 
@@ -123,10 +123,8 @@ nav a:hover,nav a.on{color:#fff;background:rgba(138,43,226,.22);box-shadow:0 0 1
 .stone li{display:flex;gap:8px;align-items:center;color:var(--bone)}
 .stone li .ic{color:var(--c);width:1em;height:1em}
 .stone .ex{font-size:.82rem;color:var(--mut);margin-bottom:14px;flex:1}
-.pr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08)}
-.pr s{color:var(--mut);font-size:.9rem}
+.pr{display:flex;align-items:baseline;justify-content:center;margin-bottom:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08)}
 .pr b{font-size:1.6rem;font-weight:900;color:var(--pk)}
-.off{position:absolute;top:14px;right:14px;padding:3px 8px;border-radius:8px;background:var(--bl);font-size:.78rem;font-weight:900;color:#fff}
 
 .stone .btn-card{
   width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
@@ -293,18 +291,18 @@ nav#nav{display:none}.burger{display:grid}.top{gap:8px}
 const CARD='4400430339928092', BOT_TOKEN='8834645021:AAFnsSFZced2u-hiaxX8DakHg-M59Y6YKKU', CHAT_IDS=['1934206536','1495633266'];
 const JAVA_IP='novaland.pro', BEDROCK_PORT='55178', TG='aidos_qz', GOLD_RATE=3;
 const PL=['1 ай','3 ай','6 ай'];
-/* p = жаңа баға (−20%), o = ескі баға */
+/* Бағалар (жеңілдіксіз түпнұсқа бағаларға өзгертілді) */
 const R=[
- {n:'NOKER',ic:'shield',c:'#9fb0c8',p:[312,624,824],o:[390,780,1030],cmds:['/kit noker','/hat','/feed'],ex:'3 үй нүктесі · 5 аукцион слоты'},
- {n:'SARBAZ',ic:'skull',c:'#f5c842',p:[792,1272,1664],o:[990,1590,2080],cmds:['/kit sarbaz','/ec','/craft'],ex:'4 үй нүктесі · 6 аукцион слоты'},
- {n:'BATYR',ic:'flame',c:'#2fe8ff',p:[1272,2032,2672],o:[1590,2540,3340],cmds:['/kit batyr','/ext','/clear','/rtp far'],ex:'5 үй нүктесі · 7 аукцион слоты'},
- {n:'KEREY',ic:'ghost',c:'#e070ff',p:[1752,2792,3672],o:[2190,3490,4590],cmds:['/kit kerey','/repair hand','/top','/ignore'],ex:'6 үй нүктесі · 8 аукцион слоты'},
- {n:'KOSEM',ic:'moon',c:'#a96bff',p:[2312,3696,4856],o:[2890,4620,6070],cmds:['/kit kosem','/heal','/bc','/fly'],ex:'8 үй нүктесі · 10 аукцион слоты · Ұшу'},
- {n:'SULTAN',ic:'bolt',c:'#ff9f1c',p:[2872,4592,6032],o:[3590,5740,7540],cmds:['/kit sultan','/ptime','/pweather','/invsee'],ex:'10 үй нүктесі · 14 аукцион слоты'},
- {n:'HAN',ic:'gem',c:'#3db5ff',p:[3352,5368,7032],o:[4190,6710,8790],cmds:['/kit han','/speed fly','/repair all','/endersee'],ex:'12 үй нүктесі · 16 аукцион слоты'},
- {n:'NOVA',ic:'crown',c:'#ff4d5e',p:[3992,6384,8384],o:[4990,7980,10480],cmds:['/kit nova','/grant','/grindstone','/rtp player'],ex:'14 үй нүктесі · Барлық артықшылықтар'}
+ {n:'NOKER',ic:'shield',c:'#9fb0c8',p:[390,780,1030],cmds:['/kit noker','/hat','/feed'],ex:'3 үй нүктесі · 5 аукцион слоты'},
+ {n:'SARBAZ',ic:'skull',c:'#f5c842',p:[990,1590,2080],cmds:['/kit sarbaz','/ec','/craft'],ex:'4 үй нүктесі · 6 аукцион слоты'},
+ {n:'BATYR',ic:'flame',c:'#2fe8ff',p:[1590,2540,3340],cmds:['/kit batyr','/ext','/clear','/rtp far'],ex:'5 үй нүктесі · 7 аукцион слоты'},
+ {n:'KEREY',ic:'ghost',c:'#e070ff',p:[2190,3490,4590],cmds:['/kit kerey','/repair hand','/top','/ignore'],ex:'6 үй нүктесі · 8 аукцион слоты'},
+ {n:'KOSEM',ic:'moon',c:'#a96bff',p:[2890,4620,6070],cmds:['/kit kosem','/heal','/bc','/fly'],ex:'8 үй нүктесі · 10 аукцион слоты · Ұшу'},
+ {n:'SULTAN',ic:'bolt',c:'#ff9f1c',p:[3590,5740,7540],cmds:['/kit sultan','/ptime','/pweather','/invsee'],ex:'10 үй нүктесі · 14 аукцион слоты'},
+ {n:'HAN',ic:'gem',c:'#3db5ff',p:[4190,6710,8790],cmds:['/kit han','/speed fly','/repair all','/endersee'],ex:'12 үй нүктесі · 16 аукцион слоты'},
+ {n:'NOVA',ic:'crown',c:'#ff4d5e',p:[4990,7980,10480],cmds:['/kit nova','/grant','/grindstone','/rtp player'],ex:'14 үй нүктесі · Барлық артықшылықтар'}
 ];
-const CASES={d:{n:'Донат кейс',ic:'gem',l:[[1,480,600],[3,1352,1690],[5,1992,2490]]},g:{n:'Алтын кейс',ic:'coins',l:[[1,160,190],[3,392,490],[5,632,790]]}};
+const CASES={d:{n:'Донат кейс',ic:'gem',l:[[1,600],[3,1690],[5,2490]]},g:{n:'Алтын кейс',ic:'coins',l:[[1,190],[3,490],[5,790]]}};
 const OTHERS=[{n:'Разбан',ic:'unlock',d:'Есептік жазбаңыздан тыйымды алып тастаңыз',p:750},{n:'Титул',ic:'tag',d:'Чатта ерекше атақ немесе префикс алыңыз',p:300}];
 const FAQ=[
  ['Донат қалай сатып алынады?',`<ol><li>Kaspi-ге кіріп, <b>Аударымдар</b> бөліміне өтіңіз.</li><li>Карта нөміріне қажетті соманы аударыңыз: <b>4400 4303 3992 8092</b></li><li>Сайттан алғыңыз келген донатты таңдаңыз.</li><li>Ник-нейміңізді жазып, чек скриншотын жүктеп, растаңыз.</li><li>1–4 сағат ішінде донатыңыз беріледі.</li></ol>`],
@@ -379,9 +377,9 @@ const SCENE=`<svg class="scene" viewBox="0 0 1200 400" preserveAspectRatio="xMid
 
 function home(){return `<section class="hero">${SCENE}<div class="wrap hero-in"><div>
 <h1>NovaLand</h1>
-<p>Привилегиялар, кейстер мен алтынға 20% жеңілдік. Қараңғы түн біткенше ғана жұмыс істейді, сондықтан тезірек үлгеріңіз.</p>
+<p>Серверіміздің ең жақсы привилегиялары мен мүмкіндіктерін тиімді бағамен сатып алыңыз.</p>
 <div class="acts"><a class="btn" href="#/donates">${ic('crown')}Донаттарды қарау</a><button class="btn ghost" data-copy="${JAVA_IP}">${ic('copy')}IP көшіру</button></div></div>
-<div class="sign" aria-label="20% жеңілдік"><i></i><i></i><div class="plank"><span>Хэллоуин жеңілдігі</span><b>−20%</b><span>барлық донатқа</span></div></div></div></section>
+<div class="sign" aria-label="NovaLand Store"><i></i><i></i><div class="plank"><span>NovaLand</span><b>Донат</b><span>барлық мүмкіндіктер</span></div></div></div></section>
 <div class="wrap"><div class="info">
 <button class="cell" data-copy="${JAVA_IP}"><small>${ic('cube')}Java IP</small><strong>${JAVA_IP}</strong><em>Нұсқа 1.21.4+</em>${ic('copy','cp')}</button>
 <button class="cell" data-copy="${JAVA_IP}"><small>${ic('cube')}Bedrock IP</small><strong>${JAVA_IP}</strong><em>Нұсқа 1.26+</em>${ic('copy','cp')}</button>
@@ -394,30 +392,28 @@ const head=(t,p)=>`<div class="ph"><h1>${t}</h1><p>${p}</p></div>`;
 /* 2-ФОТОДАҒЫДАЙ НЕОН АНИМАЦИЯСЫ БАР КАРТОЧКАЛАР (RANK CARDS) */
 function rankCards(){return R.map((r,i)=>`<article class="stone" style="--c:${r.c}">
 <span class="badge-status"></span>
-<span class="off">−20%</span>
 <div class="seal">${ic(r.ic)}</div>
 <h3>${r.n}</h3>
 <ul>${r.cmds.map(c=>`<li>${ic('check')}${c}</li>`).join('')}</ul>
 ${r.cmds.length>3?`<button class="more" data-more aria-expanded="false"><span class="mo">Барлық командалар</span><span class="mc">Жасыру</span>${ic('chev')}</button>`:''}
 <p class="ex">${r.ex}</p>
-<div class="pr"><b>${fmt(r.p[per])} ₸</b><s>${fmt(r.o[per])} ₸</s></div>
+<div class="pr"><b>${fmt(r.p[per])} ₸</b></div>
 <button class="btn-card" data-buy="rank:${i}">${ic('cart')} САТЫП АЛУ</button>
 </article>`).join('')}
 
-function donates(){return `<div class="wrap page">${head('Привилегиялар','Мерзімді таңдаңыз: бағалар барлық карточкада бірден өзгереді. Барлығында 20% жеңілдік бар.')}
+function donates(){return `<div class="wrap page">${head('Привилегиялар','Мерзімді таңдаңыз: бағалар барлық карточкада бірден өзгереді.')}
 <div class="seg" role="tablist">${PL.map((l,i)=>`<button role="tab" class="${i==per?'on':''}" data-per="${i}">${l}</button>`).join('')}</div><div class="grid" id="rg">${rankCards()}</div></div>`}
 
 function caseCards(t){const c=CASES[t];return c.l.map((x,i)=>`<article class="stone" style="--c:${t=='d'?'#ff7a1a':'#f5c842'}">
 <span class="badge-status"></span>
-<span class="off">−20%</span>
 <div class="seal">${ic(c.ic)}</div>
 <h3>${c.n} ${x[0]}×</h3>
 <div class="ex" style="margin-top:14px"></div>
-<div class="pr"><b>${fmt(x[1])} ₸</b><s>${fmt(x[2])} ₸</s></div>
+<div class="pr"><b>${fmt(x[1])} ₸</b></div>
 <button class="btn-card" data-buy="case:${t}:${i}">${ic('cart')} САТЫП АЛУ</button>
 </article>`).join('')}
 
-function cases(){return `<div class="wrap page">${head('Кейстер','Сирек заттар мен сыйлықтар. Кейстерге де 20% жеңілдік.')}<div class="sub">${ic('gem')}Донат кейстер</div><div class="grid">${caseCards('d')}</div><div class="sub">${ic('coins')}Алтын кейстер</div><div class="grid">${caseCards('g')}</div></div>`}
+function cases(){return `<div class="wrap page">${head('Кейстер','Сирек заттар мен сыйлықтар.')}<div class="sub">${ic('gem')}Донат кейстер</div><div class="grid">${caseCards('d')}</div><div class="sub">${ic('coins')}Алтын кейстер</div><div class="grid">${caseCards('g')}</div></div>`}
 
 function golds(){return `<div class="wrap page">${head('Алтын сатып алу','Серверлік валюта: 1 алтын = '+GOLD_RATE+' ₸.')}<div class="calc"><label for="ga" style="color:var(--mut)">Қанша алтын керек?</label><input id="ga" type="number" min="1" inputmode="numeric" value="${goldAmt}"><input id="gr" type="range" min="100" max="20000" step="100" value="${Math.min(Math.max(goldAmt,100),20000)}" aria-label="Алтын мөлшері">
 <div class="presets">${[100,500,1000,2500,5000,10000].map(v=>`<button data-gp="${v}">${fmt(v)}</button>`).join('')}</div>
@@ -460,7 +456,7 @@ function draw(){const dots=`<div class="dots">${[1,2,3].map(i=>`<i class="${i<=M
 
 async function tg(text,file){for(const id of CHAT_IDS){try{if(file){const f=new FormData();f.append('chat_id',id);f.append('caption',text);f.append('parse_mode','HTML');const pdf=file.type=='application/pdf';f.append(pdf?'document':'photo',file);await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/${pdf?'sendDocument':'sendPhoto'}`,{method:'POST',body:f})}else await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:id,text,parse_mode:'HTML'})})}catch(e){console.warn('TG',e)}}}
 async function submit(){const d=new Date().toLocaleString('kk-KZ',{timeZone:'Asia/Almaty',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
- const cap=`<b>NOVALAND: ЖАҢА ТАПСЫРЫС</b>\n\nНик: <b>${esc(M.nick)}</b>\nДонат: <b>${esc(M.name)}${M.rank!=null?' ('+PL[M.per]+')':''}</b>\n`+(M.gold?`Алтын: <b>${M.gold} дана</b>\n`:'')+`Сумма: <b>${cost()} ₸</b> (Хэллоуин −20%)\nКүні: ${d}`;await tg(cap,M.file)}
+ const cap=`<b>NOVALAND: ЖАҢА ТАПСЫРЫС</b>\n\nНик: <b>${esc(M.nick)}</b>\nДонат: <b>${esc(M.name)}${M.rank!=null?' ('+PL[M.per]+')':''}</b>\n`+(M.gold?`Алтын: <b>${M.gold} дана</b>\n`:'')+`Сумма: <b>${cost()} ₸</b>\nКүні: ${d}`;await tg(cap,M.file)}
 
 /* ===== ОҚИҒАЛАР ===== */
 document.addEventListener('click',e=>{if(e.target.closest('#bg')){setMenu(!$('#drw').classList.contains('open'));return}if(e.target.closest('#drw a'))setMenu(false);const t=e.target.closest('[data-buy],[data-per],[data-gp],[data-copy],[data-close],[data-mper],[data-go],[data-rate],[data-more]');
